@@ -1,9 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<!-- [rfced] pre-edited by ST 04/06/26 -->
-<!-- [rfced] formatted by ST 04/07/26 -->
-<!-- [rfced] reference review by TH 05/22/26 -->
-
 <!DOCTYPE rfc [
   <!ENTITY nbsp    "&#160;">
   <!ENTITY zwsp   "&#8203;">
@@ -81,12 +77,25 @@
     <keyword>SDN</keyword>
 
     <abstract>
+
+<!--[rfced] Is "provides" the intended word here, or does the YANG data model "enable" or "support" the policies enforced by the network devices / PEPs?
+
+Original:
+   This document defines a YANG data model for policy-based network access
+   control, which provides enforcement of
+   network access control policies based on group identity.
+
+Perhaps:
+   This document defines a YANG data model for policy-based network access
+   control, which enables enforcement of
+   network access control policies based on group identity. 
+-->      
 <t>This document defines a YANG data model for policy-based network access
    control, which provides enforcement of
    network access control policies based on group identity. This YANG data model extends Access Control Lists (ACLs) with date and time parameters to support schedule-aware policy enforcement.</t>
-      <t>Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism to ease the maintenance
-   of the mapping between a user group identifier and a set of packet header fields
-   to enforce policy-based network access control. Moreover, the document defines a Remote Authentication Dial-in
+   <t>Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism, used to enforce policy-based network access control, that eases the maintenance
+   of the mapping between a user group identifier and a set of packet header 
+   fields. Moreover, this document defines a Remote Authentication Dial-in
    User Service (RADIUS) attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information.</t>
@@ -108,9 +117,9 @@
       <ul spacing="normal">
         <li>
           <t>Endpoints do not have stable and unique IP addresses.  For example, Wireless
-LAN (WLAN) and VPN clients, as well as back-end Virtual Machine
-(VM)-based servers, can move; their IP addresses could change as a
-result. Furthermore, mechanisms such as IPv6 temporary addresses <xref target="RFC8981"/>, and Network Address Port Translation (NAPT) <xref target="RFC3022"/> may further contribute to address instability and non-uniqueness. This complicates the consistent and efficient access control policy enforcement relying on IP/transport fields (e.g., the
+LAN (WLAN) and VPN clients, as well as back-end servers based on Virtual Machines
+(VMs), can move; their IP addresses could change as a
+result. Furthermore, mechanisms such as IPv6 temporary addresses <xref target="RFC8981"/> and Network Address Port Translation (NAPT) <xref target="RFC3022"/> may further contribute to address instability and non-uniqueness. This complicates the consistent and efficient access control policy enforcement relying on IP/transport fields (e.g., the
 5-tuple). IP address-based policies may not be flexible
 enough to accommodate endpoints with volatile IP addresses.</t>
         </li>
@@ -118,13 +127,33 @@ enough to accommodate endpoints with volatile IP addresses.</t>
           <t>With the massive adoption of teleworking, there is a need to
 apply different security policies to the same set of endpoints under
 different circumstances (e.g., prevent relay attacks against a
-local attachment point to the enterprise network).  For example,
+local attachment point to the enterprise network).
+
+<!--[rfced] The first sentence mixes plural possessives ("users' access location," "users' role") with a singular possessive ("device's security posture"). Is this combination of singular and plural intentional, or should these be made singular (e.g., "user's access location" and "user's role") for consistency?
+
+In the second sentence, may we make "endpoints' identity", "context", and "grant" plural? If so "endpoints' identities" will be consistent with use in Section 3.
+
+Original:
+For example, network access might be granted based upon criteria such as users' access location, source network reputation, users' role, type of network device used (e.g., corporate-issued device versus personal device), device's security posture, etc.
+This means that the network needs to recognize the endpoints' identity and their
+current context and map the endpoints to their correct access
+grant to the network.
+
+Perhaps:
+For example, network access might be granted based upon criteria such as a user's access location, source network reputation, a user's role, the type of network device used 
+(e.g., corporate-issued device versus personal device), a device's security posture, etc. 
+This means that the network needs to recognize the endpoints' identities and their
+current contexts, and map the endpoints to their correct access
+grants to the network.
+-->
+
+For example,
 network access might be granted based upon criteria such as users'
 access location, source network reputation, users' role, time-of-
 day, type of network device used (e.g., corporate-issued device
 versus personal device), device's security posture, etc. This
 means that the network needs to recognize the endpoints' identity and their
-current context, and map the endpoints to their correct access
+current context and map the endpoints to their correct access
 grant to the network.</t>
         </li>
       </ul>
@@ -132,24 +161,24 @@ grant to the network.</t>
    which extends the IETF Access Control Lists (ACLs) module defined in <xref target="RFC8519"/>.
    This module can be used to ensure consistent enforcement of ACL policies
    based on the group identity. Additionally, the YANG data model defined in the document also extends ACLs with date and time parameters to support schedule-aware policy enforcement.</t>
-      <t>The ACL concept has been generalized to be device-nonspecific, and can be
-   defined at network/administrative domain level <xref target="RFC9899"/>. To
+      <t>The ACL concept has been generalized to be device-nonspecific, and it can be
+   defined at the network/administrative domain level <xref target="RFC9899"/>. To
    allow for all  ACL applications, the YANG module for policy-based network
    ACL defined in <xref target="sec-UCL"/> does not limit how it can be used.</t>
       <t>Specifically in scenarios where network access is triggered by user authentication, this document also defines a mechanism to establish a mapping between (1) the
    user group identifier (ID) and (2) common IP packet header fields and other
-   encapsulating packet data (e.g., MAC address) to execute the policy-based access control.
+   encapsulating packet data (e.g., Media Access Control (MAC) address) to execute the policy-based access control.
    Additionally, the document defines a Remote Authentication Dial-in
    User Service (RADIUS) <xref target="RFC2865"/> attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information (<xref target="sec-radius"/>).</t>
-      <t>Although the document cites MAC addresses as an example in some sections, the
+      <t>Although this document cites MAC addresses as an example in some sections, this
    document does not make assumptions about which identifiers are used to trigger ACLs.
    These examples should not be considered as recommendations. Readers should be
    aware that MAC-based ACLs can be bypassed by clearing the MAC address.
    Other implications related to the change of MAC addresses are discussed in
    <xref target="RFC9797"/>.</t>
-      <t>The document does not specify how to map the policy group identifiers to
+      <t>This document does not specify how to map the policy group identifiers to
 dedicated packet fields. Group-Based Policy (GBP), discussed in <xref section="6.2.3" sectionFormat="of" target="RFC9638"/>,
    provides an example of how that may be achieved.</t>
     </section>
@@ -164,7 +193,7 @@ dedicated packet fields. Group-Based Policy (GBP), discussed in <xref section="6
         </t>
       <t>The meanings of the symbols in tree diagrams are defined in
    <xref target="RFC8340"/>.</t>
-      <t>The document uses the following terms defined in <xref target="RFC8519"/>:</t>
+      <t>This document uses the following terms defined in <xref target="RFC8519"/>:</t>
       <ul spacing="normal">
         <li>
           <t>Access Control Entry (ACE)</t>
@@ -183,38 +212,57 @@ dedicated packet fields. Group-Based Policy (GBP), discussed in <xref section="6
         </dd>
         <dt/>
         <dd>
-          <t>An enterprise device could be a server that hosts applications or software that deliver services to enterprise users. It could also be an enterprise Internet of Things (IoT) device that serves a limited purpose (e.g., a printer that allows users to scan and print), etc.</t>
+          <t>An enterprise device could be a server that hosts applications or software that delivers services to enterprise users.
+
+ <!--[rfced] Does the inclusion of "etc." mean that more than one example was intended? If so, please provide another example. If not, may we remove "etc."?
+
+Original:
+It could also be an enterprise Internet of Things (IoT) device that serves a limited purpose (e.g., a printer that allows users to scan and print), etc.
+-->           
+
+            It could also be an enterprise Internet of Things (IoT) device that serves a limited purpose (e.g., a printer that allows users to scan and print), etc.</t>
         </dd>
         <dt/>
         <dd>
-          <t>While a personal device (BYOD) is not a physical asset of the enterprise, it is subject to the enterprise' access control policies when accessing the enterprise resources controlled by the centrally managed authority.</t>
+          <t>While a personal device (BYOD) is not a physical asset of the enterprise, it is subject to the enterprise's access control policies when accessing the enterprise resources controlled by the centrally managed authority.</t>
         </dd>
         <dt>Endpoint:</dt>
         <dd>
-          <t>Refers to an entity which could be an end-user, enterprise device, or application that actually connects to a network.</t>
+          <t>An entity that could be an end user, enterprise device, or application that actually connects to a network.</t>
         </dd>
         <dt>Endpoint group:</dt>
         <dd>
-          <t>Refers to a group of endpoints that share common access control policies.</t>
+          <t>A group of endpoints that share common access control policies.</t>
         </dd>
         <dt>User group:</dt>
         <dd>
-          <t>A group of end-users who will be assigned the same network access policy. An end-user is defined as a person. Refer to <xref target="sec-ug"/> for more details.</t>
+          <t>A group of end users who will be assigned the same network access policy. An end user is defined as a person. Refer to <xref target="sec-ug"/> for more details.</t>
         </dd>
-        <dt>device group:</dt>
+        <dt>Device group:</dt>
         <dd>
-          <t>A collection of enterprise devices that share a common access control policies. Refer to <xref target="sec-dg"/> for more details.</t>
+          <t>A collection of enterprise devices that share common access control policies. Refer to <xref target="sec-dg"/> for more details.</t>
         </dd>
         <dt>Application group:</dt>
         <dd>
-          <t>A collection of applications that share a common access control policies. An application is a software program used for a specific service. Refer to <xref target="sec-ag"/> for more details.</t>
+          <t>A collection of applications that share common access control policies. An application is a software program used for a specific service. Refer to <xref target="sec-ag"/> for more details.</t>
         </dd>
         <dt>Endpoint group identifier:</dt>
         <dd>
           <t>An identifier used to represent the collective identity of
    an endpoint group. An endpoint group may include a user group, device group, or application group.</t>
         </dd>
-        <dt>User group based Control List (UCL) data model:</dt>
+
+<!--[rfced] We updated the expansion of "UCL" as "User-group-based Control List (UCL)" for consistency (which matches how this document uses "User-group-based Security..."). Note that there are two instances. Please let us know of any objections. 
+
+One example:
+
+Original:
+   User group based Control List (UCL) data model:
+
+Current:
+   User-group-based Control List (UCL) data model:
+-->
+        <dt>User-group-based Control List (UCL) data model:</dt>
         <dd>
           <t>A YANG data model for policy-based network access
 control that specifies an extension to the "ietf-access-control-list" module <xref target="RFC8519"/>.
@@ -230,7 +278,7 @@ both at the network device level and at the network/administrative domain level.
     <section anchor="sample-usage">
       <name>Sample Usage</name>
       <t>Access to some networks (e.g., enterprise networks) requires
-   recognizing the endpoints' identities no matter how, where, and when they
+   recognizing the endpoints' identities no matter how, where, or when they
    connect to the network resources.  Then, the network maps the
    (connecting) endpoints to their access authorization rights.  Such rights
    are defined using local policies.  As discussed in <xref target="intro"/>,
@@ -243,7 +291,7 @@ both at the network device level and at the network/administrative domain level.
    This approach greatly reduces
    the overhead of the administrators and optimizes the ACL resources.</t>
       <t>The network ACLs can be provisioned on devices using specific
-   mechanisms, such as <xref target="RFC8519"/> or <xref target="RFC9899"/>.</t>
+   mechanisms, such as described in <xref target="RFC8519"/> or <xref target="RFC9899"/>.</t>
       <t>Different policies may need to be applied in different contextual situations.
    For example, companies may restrict (or grant) employees access to specific
    internal or external resources during work hours,
@@ -254,7 +302,7 @@ both at the network device level and at the network/administrative domain level.
    services.</t>
     </section>
     <section anchor="policy-based-network-access-control">
-      <name>Policy-based Network Access Control</name>
+      <name>Policy-Based Network Access Control</name>
       <section anchor="overview">
         <name>Overview</name>
         <t>An example architecture of a system that provides real-time and
@@ -263,23 +311,23 @@ both at the network device level and at the network/administrative domain level.
    includes the following functional entities and interfaces:</t>
         <ul spacing="normal">
           <li>
-            <t>A service orchestrator which coordinates the overall service, including security policies. The service may be connectivity or any other access to resources that can be hosted and offered by a network.</t>
+            <t>A service orchestrator that coordinates the overall service, including security policies. The service may be connectivity or any other access to resources that can be hosted and offered by a network.</t>
           </li>
           <li>
-            <t>A Software-Defined Networking (SDN) <xref target="RFC7149"/> <xref target="RFC7426"/> controller which is responsible for maintaining endpoint-group based ACLs and mapping the endpoint group to the associated attributes information (e.g., packet header fields). An SDN controller also behaves as a Policy Decision Point (PDP) <xref target="RFC3198"/> and pushes the required access control policies to relevant Policy Enforcement Points (PEPs) <xref target="RFC3198"/>. A PDP is also known as "policy server" <xref target="RFC2753"/>.  </t>
+            <t>A Software-Defined Networking (SDN) <xref target="RFC7149"/> <xref target="RFC7426"/> controller that is responsible for maintaining endpoint-group-based ACLs and mapping the endpoint group to the associated attributes information (e.g., packet header fields). An SDN controller also behaves as a Policy Decision Point (PDP) <xref target="RFC3198"/> and pushes the required access control policies to relevant Policy Enforcement Points (PEPs) <xref target="RFC3198"/>. A PDP is also known as a "policy server" <xref target="RFC2753"/>.  </t>
             <t>
 An SDN controller may interact with an Authentication, Authorization, and Accounting (AAA) <xref target="RFC3539"/> server or a Network Access Server (NAS) <xref target="RFC7542"/>.</t>
           </li>
           <li>
-            <t>A NAS entity which handles authentication requests. The NAS interacts with an AAA server to complete user authentication using protocols like RADIUS <xref target="RFC2865"/>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.  </t>
+            <t>A NAS entity that handles authentication requests. The NAS interacts with an AAA server to complete user authentication using protocols like RADIUS <xref target="RFC2865"/>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.  </t>
             <t>
 A new RADIUS attribute is defined in <xref target="sec-radius"/> for this purpose.</t>
           </li>
           <li>
-            <t>The AAA server provides a collection of authentication, authorization, and accounting functions. The AAA server is responsible for centralized user information management. The AAA server is preconfigured with user credentials (e.g., username and password), possible group identities and related user attributes (users may be divided into different groups based on different user attributes).</t>
+            <t>The AAA server provides a collection of authentication, authorization, and accounting functions. The AAA server is responsible for centralized user information management. The AAA server is preconfigured with user credentials (e.g., username and password), possible group identities, and related user attributes (users may be divided into different groups based on different user attributes).</t>
           </li>
           <li>
-            <t>The Policy Enforcement Point (PEP) is the central entity which is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers packet header fields based ACL policies to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint-group IDs, and acts upon the endpoint-group ID-based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in <xref section="6.2.3" sectionFormat="of" target="RFC9638"/>).  </t>
+            <t>PEP is the central entity that is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers ALC policies based on packet header fields to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint-group IDs and act upon the endpoint-group ID-based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in <xref section="6.2.3" sectionFormat="of" target="RFC9638"/>).  </t>
             <t>
 Multiple PEPs may be involved in a network.  </t>
             <t>
@@ -288,7 +336,7 @@ A PEP exposes a YANG-based interface (e.g., NETCONF <xref target="RFC6241"/>) to
         </ul>
         <t><xref target="arch"/> provides the overall architecture and procedure for policy-based access control management.</t>
         <figure anchor="arch">
-          <name>An Example Architecture for User Group-based Policy Management</name>
+          <name>An Example Architecture for User-Group-Based Policy Management</name>
           <artset>
             <artwork type="svg" align="center"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="400" width="536" viewBox="0 0 536 400" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 16,144 L 16,176" fill="none" stroke="black"/>
@@ -728,7 +776,7 @@ module ietf-ucl-acl {
      Author:   Daniel King
                <mailto:d.king@lancaster.ac.uk>";
   description
-    "The User group-based Control List (UCL) YANG module augments
+    "The User-group-based Control List (UCL) YANG module augments
      the IETF Access Control Lists (ACLs) module. UCL is meant to
      ensure consistent enforcement of ACL policies based on
      the group identity.
