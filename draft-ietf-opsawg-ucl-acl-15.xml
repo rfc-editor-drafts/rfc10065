@@ -474,7 +474,7 @@ in <xref target="sec-UCL"/>. An example is provided in <xref target="controller-
     user group with the identifier returned to the NAS
     as the authentication result (see <xref target="sec-radius"/>).
     If the authentication fails, the user is not assigned any user
-    group, which also means that the user has no access (i.e., Access-Reject returned); or the user
+    group, which also means that the user has no access (i.e., Access-Reject returned) or the user
     is assigned a special group with very limited access permissions
     for the network (as a function of the local policy). ACLs are
     enforced so that flows from that IP address are discarded
@@ -495,7 +495,7 @@ in <xref target="sec-UCL"/>. An example is provided in <xref target="controller-
             <t>Either group-based or packet header field-based access control policies
    are maintained on relevant PEPs under the SDN controller's management.
    Both types of ACL policy may exist on
-   the PEP. <xref target="PEP-ucl"/> and <xref target="PEP-acl"/> elaborate on each case.</t>
+   the PEP. Appendices <xref target="PEP-ucl" format="counter"/> and <xref target="PEP-acl" format="counter"/> elaborate on each case.</t>
           </dd>
         </dl>
         <t>A similar flow applies to policy management based on other endpoint group types, such as device or application groups,
@@ -510,9 +510,9 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
           <t>The user group is determined by a set of predefined policy criteria
    (e.g., source IP address, geolocation data, time of day, or device certificate).
    It uses an identifier (user group ID) to represent the collective identity of
-   a group of users. Users may be moved to different user groups if their
-   composite attributes, environment, and/or local enterprise policy change.</t>
-          <t>A user is authenticated, and classified at the AAA server, and
+   a group of users. Users may be moved to different user groups if there is a change in their
+   composite attributes, environment, and/or local enterprise policy.</t>
+          <t>A user is authenticated, classified at the AAA server, and
    assigned to a user group.  A user's group membership may change as
    aspects of the user change.  For example, if the user group
    membership is determined solely by the source IP address, then a
@@ -526,7 +526,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
    groups may share several common criteria.  That is, user group
    criteria are not mutually exclusive.  For example, the policy
    criteria of user groups R&amp;D Regular and R&amp;D BYOD may share the same
-   set of users that belong to the R&amp;D organization, and differ only in
+   set of users that belong to the R&amp;D organization but differ only in
    the type of clients (firm-issued clients vs. users' personal
    clients).  Likewise, the same user may be assigned to different user
    groups depending on the time of day or the type of day (e.g.,
@@ -597,16 +597,16 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
               </tr>
             </tbody>
           </table>
-          <t>Matching abstract device group ID instead of specified addresses in
+          <t>Matching abstract device group IDs instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
    back-end VM-based server migration).</t>
         </section>
         <section anchor="sec-ag">
           <name>Application Group</name>
-          <t>An application group is a collection of applications that share a common access control policies.
+          <t>An application group is a collection of applications that share common access control policies.
    A device may run multiple applications, and different policies might need to be
    applied to the applications and device. A single application may need to run on
-   multiple devices/VMs/containers, the abstraction of application group eases the
+   multiple devices/VMs/containers; the abstraction of application group eases the
    process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
    <xref target="ag-example"/> shows an example of how application group definitions may be characterized.</t>
           <table anchor="ag-example">
@@ -630,7 +630,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
                 <td align="left">Messaging application</td>
               </tr>
               <tr>
-                <td align="left">document Collaboration</td>
+                <td align="left">Document Collaboration</td>
                 <td align="left">baz-90</td>
                 <td align="left">Real-time document editing application</td>
               </tr>
@@ -643,7 +643,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
         <t>Policy enforcement can be targeted to different endpoint groups in different scenarios.
   For example, when a user connects to the network and accesses an application hosted on one or multiple devices, access policies may be applied to different user groups.
   In some cases, applications and devices may operate and run without requiring any user interventions,
-  or they may require user authentication but access rules do not differentiate between different users.
+  or they may require user authentication, but access rules do not differentiate between different users.
   This enables policies to be applied to the application or device group.
   A device group can be used when there is only one single application running on the device
   or different applications running but with the same access control rules.
@@ -656,8 +656,8 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
       <section anchor="module-overview">
         <name>Module Overview</name>
         <t>This module specifies an extension to the "ietf-access-control-list" module <xref target="RFC8519"/>. This extension adds
-   endpoint groups so that an endpoint group identifier can be matched upon, and also
-   enable access control policy activation based on date and time conditions.</t>
+   endpoint groups so that an endpoint group identifier can be matched upon, and it also
+   enables access control policy activation based on date and time conditions.</t>
         <t><xref target="ucl-tree"/> provides the tree structure of the "ietf-ucl-acl" module.</t>
         <figure anchor="ucl-tree">
           <name>UCL Extension</name>
