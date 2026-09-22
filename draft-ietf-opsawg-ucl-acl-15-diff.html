@@ -65,9 +65,9 @@ Status of This Memo
    Internet-Drafts are draft documents valid</font></strike> <strong><font color='green'>the IETF community.  It has
    received public review and has been approved</font></strong> for <strike><font color='red'>a maximum</font></strike> <strong><font color='green'>publication by the
    Internet Engineering Steering Group (IESG).  Further information on
-   Internet Standards is available in Section 2 of RFC 7841.
+   Internet Standards is available in Section 2</font></strong> of <strike><font color='red'>six months</font></strike> <strong><font color='green'>RFC 7841.
 
-   Information about the current status</font></strong> of <strike><font color='red'>six months</font></strike> <strong><font color='green'>this document, any errata,</font></strong>
+   Information about the current status of this document, any errata,</font></strong>
    and <strong><font color='green'>how to provide feedback on it</font></strong> may be <strike><font color='red'>updated, replaced, or obsoleted by other documents</font></strike> <strong><font color='green'>obtained</font></strong> at <strike><font color='red'>any
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
@@ -107,7 +107,7 @@ Table of Contents
    5.  The UCL Extension to the ACL Module <strike><font color='red'>. . . . . . . . . . . . .  12</font></strike>
      5.1.  Module Overview <strike><font color='red'>. . . . . . . . . . . . . . . . . . . . .  12</font></strike>
      5.2.  The "ietf-ucl-acl" YANG Module  <strike><font color='red'>. . . . . . . . . . . . .  14</font></strike>
-   6.  User Access Control Group ID RADIUS Attribute <strike><font color='red'>. . . . . . . .  22</font></strike>
+   6.  <strike><font color='red'>User Access Control Group ID</font></strike>  <strong><font color='green'>User-Access-Group-ID</font></strong> RADIUS Attribute <strike><font color='red'>. . . . . . . .  22</font></strike>
    7.  RADIUS Attributes <strike><font color='red'>. . . . . . . . . . . . . . . . . . . . . .  23</font></strike>
    8.  Operational Considerations  <strike><font color='red'>. . . . . . . . . . . . . . . . .  24</font></strike>
      8.1.  Deployment Options  <strike><font color='red'>. . . . . . . . . . . . . . . . . . .  24</font></strike>
@@ -122,10 +122,10 @@ Table of Contents
    11. References  <strike><font color='red'>. . . . . . . . . . . . . . . . . . . . . . . . .  27</font></strike>
      11.1.  Normative References <strike><font color='red'>. . . . . . . . . . . . . . . . . .  27</font></strike>
      11.2.  Informative References <strike><font color='red'>. . . . . . . . . . . . . . . . .  28</font></strike>
-   Appendix A.  Examples Usage <strike><font color='red'>. . . . . . . . . . . . . . . . . . .  32</font></strike>
-     A.1.  Configuring the Controller Using Group based ACL  <strike><font color='red'>. . . .  32</font></strike>
-     A.2.  Configuring a PEP Using Group-based ACL <strike><font color='red'>. . . . . . . . .  34</font></strike>
-     A.3.  Configuring PEPs Using Address-based ACLs <strike><font color='red'>. . . . . . . .  38</font></strike>
+   Appendix A.  <strike><font color='red'>Examples</font></strike>  Usage <strike><font color='red'>. . . . . . . . . . . . . . . . . . .  32</font></strike> <strong><font color='green'>Examples</font></strong>
+     A.1.  Configuring the Controller Using <strike><font color='red'>Group based</font></strike> <strong><font color='green'>the Group-Based</font></strong> ACL  <strike><font color='red'>. . . .  32</font></strike>
+     A.2.  Configuring a PEP Using <strike><font color='red'>Group-based</font></strike> <strong><font color='green'>the Group-Based</font></strong> ACL <strike><font color='red'>. . . . . . . . .  34</font></strike>
+     A.3.  Configuring <strike><font color='red'>PEPs</font></strike> <strong><font color='green'>a PEP</font></strong> Using <strike><font color='red'>Address-based ACLs . . . . . . . .  38</font></strike> <strong><font color='green'>an Address-Based ACL</font></strong>
    Acknowledgments <strike><font color='red'>. . . . . . . . . . . . . . . . . . . . . . . . .  42</font></strike>
    Authors' Addresses  <strike><font color='red'>. . . . . . . . . . . . . . . . . . . . . . .  42</font></strike>
 
@@ -472,16 +472,15 @@ Table of Contents
    (e.g., source IP address, geolocation data, time of day, or device
    certificate).  It uses an identifier (user group ID) to represent the
    collective identity of a group of users.  Users may be moved to
-   different user groups if their composite attributes, environment,
-   and/or local enterprise policy change.
+   different user groups if <strong><font color='green'>there is a change in</font></strong> their composite
+   attributes, environment, and/or local enterprise <strike><font color='red'>policy change.</font></strike> <strong><font color='green'>policy.</font></strong>
 
-   A user is authenticated, and classified at the AAA server, and
-   assigned to a user group.  A user's group membership may change as
-   aspects of the user change.  For example, if the user group
-   membership is determined solely by the source IP address, then a
-   given user's group ID will change when the user is assigned a new IP
-   address that falls outside of the range of addresses of the previous
-   user group.
+   A user is authenticated, <strike><font color='red'>and</font></strike> classified at the AAA server, and assigned
+   to a user group.  A user's group membership may change as aspects of
+   the user change.  For example, if the user group membership is
+   determined solely by the source IP address, then a given user's group
+   ID will change when the user is assigned a new IP address that falls
+   outside of the range of addresses of the previous user group.
 
    This document does not make any assumption about how user groups are
    defined.  Such considerations are deployment-specific and are out of
@@ -490,7 +489,7 @@ Table of Contents
    groups may share several common criteria.  That is, user group
    criteria are not mutually exclusive.  For example, the policy
    criteria of user groups R&amp;D Regular and R&amp;D BYOD may share the same
-   set of users that belong to the R&amp;D organization, and differ only in
+   set of users that belong to the R&amp;D <strike><font color='red'>organization, and</font></strike> <strong><font color='green'>organization but</font></strong> differ only in
    the type of clients (firm-issued clients vs. users' personal
    clients).  Likewise, the same user may be assigned to different user
    groups depending on the time of day or the type of day (e.g.,
@@ -528,17 +527,17 @@ Table of Contents
 
                        Table 2: Device Group Example
 
-   Matching abstract device group ID instead of specified addresses in
+   Matching abstract device group <strike><font color='red'>ID</font></strike> <strong><font color='green'>IDs</font></strong> instead of specified addresses in
    ACL polices helps shield the consequences of address change (e.g.,
    back-end VM-based server migration).
 
 4.2.3.  Application Group
 
-   An application group is a collection of applications that share a
+   An application group is a collection of applications that share <strike><font color='red'>a</font></strike>
    common access control policies.  A device may run multiple
    applications, and different policies might need to be applied to the
    applications and device.  A single application may need to run on
-   multiple devices/VMs/containers, the abstraction of application group
+   multiple <strike><font color='red'>devices/VMs/containers,</font></strike> <strong><font color='green'>devices/VMs/containers;</font></strong> the abstraction of application group
    eases the process of application migration.  For example, the policy
    does not depend on the transport coordinates (i.e., 5-tuple).
    Table 3 shows an example of how application group definitions may be
@@ -552,7 +551,7 @@ Table of Contents
       +-----------------------+----------+--------------------------+
       | Instant Messaging     | baz-80   | Messaging application    |
       +-----------------------+----------+--------------------------+
-      | document              | baz-90   | Real-time document       |
+      | <strike><font color='red'>document</font></strike> <strong><font color='green'>Document</font></strong>              | baz-90   | Real-time document       |
       | Collaboration         |          | editing application      |
       +-----------------------+----------+--------------------------+
 
@@ -566,7 +565,8 @@ Table of Contents
    devices, access policies may be applied to different user groups.  In
    some cases, applications and devices may operate and run without
    requiring any user interventions, or they may require user
-   authentication but access rules do not differentiate between
+   <strike><font color='red'>authentication</font></strike>
+   <strong><font color='green'>authentication,</font></strong> but access rules do not differentiate between
    different users.  This enables policies to be applied to the
    application or device group.  A device group can be used when there
    is only one single application running on the device or different
@@ -580,8 +580,8 @@ Table of Contents
 
    This module specifies an extension to the "ietf-access-control-list"
    module [RFC8519].  This extension adds endpoint groups so that an
-   endpoint group identifier can be matched upon, and also enable access
-   control policy activation based on date and time conditions.
+   endpoint group identifier can be matched upon, and <strong><font color='green'>it</font></strong> also <strike><font color='red'>enable</font></strike> <strong><font color='green'>enables</font></strong>
+   access control policy activation based on date and time conditions.
 
    Figure 2 provides the tree structure of the "ietf-ucl-acl" module.
 
@@ -650,18 +650,18 @@ Table of Contents
 
    The first part of the "ietf-ucl-acl" module augments the "acl" list
    in the "ietf-access-control-list" module [RFC8519] with an "endpoint-
-   groups" container having a list of "endpoint group" inside, each
+   groups" container <strike><font color='red'>having a list of</font></strike> <strong><font color='green'>that includes an</font></strong> "endpoint group" <strike><font color='red'>inside,</font></strike> <strong><font color='green'>list, where</font></strong> each
    entry has a "group-id" that uniquely identifies the endpoint group
    and a "group-type" parameter to specify the endpoint group type.
 
-      "group-id" is defined as a string rather than unsigned integer
-      (e.g., uint32) to accommodate deployments which require some
+      "group-id" is defined as a string rather than <strong><font color='green'>an</font></strong> unsigned integer
+      (e.g., uint32) to accommodate deployments <strike><font color='red'>which</font></strike> <strong><font color='green'>that</font></strong> require some
       identification hierarchy within a domain.  Such a hierarchy is
       meant to ease coordination within an administrative domain.  There
       might be cases where a domain needs to tag packets with the group
       they belong to.  The tagging does not need to mirror exactly the
       "group ID" used to populate the policy.  How the "group-id" string
-      is mapped to the tagging or field in the packet header in
+      is mapped to the tagging or field in the packet header in <strong><font color='green'>an</font></strong>
       encapsulation scenario is outside the scope of this document.
       Augmentation may be considered in the future to cover
       encapsulation considerations.
@@ -672,9 +672,9 @@ Table of Contents
    the match criteria.
 
    The third part of the module augments the "ace" list in the "ietf-
-   access-control-list" module [RFC8519] with date and time specific
+   access-control-list" module [RFC8519] with <strike><font color='red'>date</font></strike> <strong><font color='green'>date-</font></strong> and <strike><font color='red'>time specific</font></strike> <strong><font color='green'>time-specific</font></strong>
    parameters to allow ACE to be activated based on a date/time
-   condition.  Two types of time range are defined, which reuse
+   condition.  Two types of time <strike><font color='red'>range</font></strike> <strong><font color='green'>ranges</font></strong> are defined, which reuse
    "recurrence" and "period" groupings defined in the "ietf-schedule"
    YANG module in [RFC9922], respectively.
 
@@ -705,7 +705,7 @@ Table of Contents
      organization
        "IETF OPSWG Working Group";
      contact
-       "WG Web: &lt;https://datatracker.ietf.org/wg/opsawg/&gt;
+       "WG Web: <strike><font color='red'>&lt;https://datatracker.ietf.org/wg/opsawg/&gt;</font></strike>  <strong><font color='green'>https://datatracker.ietf.org/wg/opsawg/</font></strong>
         WG List: OPSAWG &lt;mailto:opsawg@ietf.org&gt;
 
         Editor:   Qiufang Ma
@@ -744,7 +744,8 @@ Table of Contents
          "Initial revision.";
        reference
          "RFC XXXX: A YANG Data Model and RADIUS Extension for
-                    Policy-based Network Access Control";
+                    <strike><font color='red'>Policy-based</font></strike>
+                    <strong><font color='green'>Policy-Based</font></strong> Network Access Control";
      }
 
      feature schedule {
@@ -816,10 +817,10 @@ Table of Contents
        description
          "An ACL that matches based on an endpoint group identity,
           which can represent the collective identity of a group of
-          authenticated users, end-devices, or applications.
+          authenticated users, <strike><font color='red'>end-devices,</font></strike> <strong><font color='green'>end devices,</font></strong> or applications.
           An endpoint group identity may be carried in the outer/inner
           packet header (e.g., via Network Virtualization over Layer 3
-          (NVO3) encapsulation), or may not correspond to any field in
+          (NVO3) <strike><font color='red'>encapsulation),</font></strike> <strong><font color='green'>encapsulation)</font></strong> or may not correspond to any field in
           the packet header. Matching on Layer 4 header fields may also
           exist in the ACEs.";
      }
@@ -832,7 +833,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the IPv4 header and endpoint group identities, which can
           represent the collective identity of a group of authenticated
-          users, end-devices, or applications. Matching on Layer 4
+          users, <strike><font color='red'>end-devices,</font></strike> <strong><font color='green'>end devices,</font></strong> or applications. Matching on Layer 4
           header fields may also exist in the ACEs.";
      }
 
@@ -844,7 +845,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the IPv6 header and endpoint group identities, which can
           represent the collective identity of a group of authenticated
-          users, end-devices, or applications. Matching on Layer 4
+          users, <strike><font color='red'>end-devices,</font></strike> <strong><font color='green'>end devices,</font></strong> or applications. Matching on Layer 4
           header fields may also exist in the ACEs.";
      }
 
@@ -857,7 +858,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the IPv4 header, IPv6 header, and endpoint group
           identities, which can represent the collective identity of a
-          group of authenticated users, end-devices, or applications.
+          group of authenticated users, <strike><font color='red'>end-devices,</font></strike> <strong><font color='green'>end devices,</font></strong> or applications.
           Matching on Layer 4 header fields may also exist in the
           ACEs.";
      }
@@ -870,7 +871,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the Ethernet header and endpoint group identities,
           which can represent the collective identity of a group of
-          authenticated users, end-devices, or applications. Matching
+          authenticated users, <strike><font color='red'>end-devices,</font></strike> <strong><font color='green'>end devices,</font></strong> or applications. Matching
           on Layer 4 header fields may also exist in the ACEs.";
      }
 
@@ -883,7 +884,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the Ethernet header, IPv4 header, and endpoint group
           identities, which can represent the collective identity of a
-          group of authenticated users, end-devices or applications.
+          group of authenticated users, <strike><font color='red'>end-devices</font></strike> <strong><font color='green'>end devices,</font></strong> or applications.
           Matching on Layer 4 header fields may also exist in the
           ACEs.";
      }
@@ -897,7 +898,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the Ethernet header, IPv6 header, and endpoint group
           identities, which can represent the collective identity of
-          a group of authenticated users, end-devices or applications.
+          a group of authenticated users, <strike><font color='red'>end-devices</font></strike> <strong><font color='green'>end devices,</font></strong> or applications.
           Matching on Layer 4 header fields may also exist in the
           ACEs.";
      }
@@ -912,7 +913,7 @@ Table of Contents
          "An ACL that contains a mix of entries that match on fields
           in the Ethernet header, IPv4 header, IPv6 header, and endpoint
           group identities, which can represent the collective identity
-          of a group of authenticated users, end-devices or
+          of a group of authenticated users, <strike><font color='red'>end-devices</font></strike> <strong><font color='green'>end devices,</font></strong> or
           applications. Matching on Layer 4 header fields may also exist
           in the ACEs.";
      }
@@ -1011,7 +1012,6 @@ Table of Contents
          description
            "Defines when the access control entry rules
             are applied based on date and time conditions.
-
             If it is not configured, the ACE is immediately
             and always applied.";
          choice schedule-type {
@@ -1035,10 +1035,10 @@ Table of Contents
    }
    &lt;CODE ENDS&gt;
 
-6.  User Access Control Group ID RADIUS Attribute
+6.  <strike><font color='red'>User Access Control Group ID</font></strike>  <strong><font color='green'>User-Access-Group-ID</font></strong> RADIUS Attribute
 
-   This section defines a User-Access-Group-ID RADIUS attribute which is
-   designed for user-centric access control scenarios where network
+   This section defines a User-Access-Group-ID RADIUS <strike><font color='red'>attribute</font></strike> <strong><font color='green'>attribute,</font></strong> which
+   is designed for user-centric access control scenarios where network
    access is triggered by user authentication and used to indicate the
    user group ID to be used by the NAS.  For other endpoint group types,
    such as device group or application group, the identifiers are
@@ -1059,7 +1059,7 @@ Table of Contents
    as a hint to the RADIUS server to indicate a preference.  However,
    the server is not required to honor such a preference.  If more than
    one instance of the User-Access-Group-ID Attribute appears in a
-   RADIUS Access-Accept packet, this means that the user is a member of
+   RADIUS Access-Accept packet, <strike><font color='red'>this</font></strike> <strong><font color='green'>it</font></strong> means that the user is a member of
    many groups.
 
    The User-Access-Group-ID Attribute MAY appear in a RADIUS CoA-Request
@@ -1075,17 +1075,18 @@ Table of Contents
 
    The User-Access-Group-ID Attribute is structured as follows:
 
-   <strike><font color='red'>Type</font></strike>
+   <strike><font color='red'>Type
+      TBA1
 
-   <strong><font color='green'>Type:</font></strong>  TBA1
+   Length</font></strike>
 
-   <strike><font color='red'>Length</font></strike>
+   <strong><font color='green'>Type:  241.12
 
-   <strong><font color='green'>Length:</font></strong>  This field indicates the total length, in octets, of all
-      fields of this attribute, including the Type, Length, <strike><font color='red'>Extended-Type,</font></strike> <strong><font color='green'>Extended-
-      Type,</font></strong> and the "Value".
+   Length:</font></strong>  This field indicates the total length, in octets, of all
+      fields of this <strike><font color='red'>attribute,</font></strike> <strong><font color='green'>attribute --</font></strong> including the Type, Length, <strike><font color='red'>Extended-Type,</font></strike> <strong><font color='green'>and
+      Extended-Type --</font></strong> and the "Value".
 
-      The Length MUST be at most 67 octets.  The maximum length is 67
+      The Length MUST be <strike><font color='red'>at most</font></strike> 67 <strike><font color='red'>octets.</font></strike> <strong><font color='green'>octets at most.</font></strong>  The maximum length is 67
       octets to accommodate the maximum group ID of 64 octets plus one
       octet for Type, one octet for Length, and one octet for Extended-
       Length.
@@ -1098,8 +1099,8 @@ Table of Contents
 
 7.  RADIUS Attributes
 
-   Table 4 provides a guide as what type of RADIUS packets that may
-   contain User-Access-Group-ID Attribute, and in what quantity.
+   Table 4 provides a guide <strike><font color='red'>as</font></strike> <strong><font color='green'>that indicates</font></strong> what type of RADIUS packets <strike><font color='red'>that</font></strike>
+   may contain <strong><font color='green'>a</font></strong> User-Access-Group-ID <strike><font color='red'>Attribute,</font></strike> <strong><font color='green'>Attribute</font></strong> and in what quantity.
 
      +================+=========+=========+===========+==============+
      | Access-Request | Access- | Access- | Access-   | Attribute    |
@@ -1119,9 +1120,9 @@ Table of Contents
 
    Notation for Table 4:
 
-   0  This attribute MUST NOT be present in packet.
+   0  This attribute MUST NOT be present in <strong><font color='green'>the</font></strong> packet.
 
-   0+  Zero or more instances of this attribute MAY be present in
+   0+  Zero or more instances of this attribute MAY be present in <strong><font color='green'>the</font></strong>
       packet.
 
 8.  Operational Considerations
@@ -1131,9 +1132,10 @@ Table of Contents
    The UCL model can be implemented in different ways.
 
    In some cases, the UCL data model is implemented at the network/
-   administrative domain level with an SDN controller maintaining the
-   dynamical mapping from endpoint group ID to IP/transport fields
-   (e.g., the 5-tuple) and programing the PEPs with IP address/5-tuple
+   administrative domain <strike><font color='red'>level with</font></strike> <strong><font color='green'>level, where</font></strong> an SDN controller <strike><font color='red'>maintaining</font></strike> <strong><font color='green'>maintains</font></strong> the
+   <strike><font color='red'>dynamical</font></strike>
+   <strong><font color='green'>dynamic</font></strong> mapping from <strong><font color='green'>an</font></strong> endpoint group ID to IP/transport fields
+   (e.g., the 5-tuple) and <strike><font color='red'>programing</font></strike> <strong><font color='green'>programs</font></strong> the PEPs with <strike><font color='red'>IP address/5-tuple</font></strike> <strong><font color='green'>IP-address or 5-tuple-</font></strong>
    based ACLs.  In such cases, PEPs do not require implementing specific
    logic (including hardware) compared to the enforcement of
    conventional ACLs.
@@ -1144,11 +1146,11 @@ Table of Contents
    of network connection change or VM/application migration, dedicated
    hardware/software support might be needed for PEPs to understand the
    endpoint group identifier.  In scenarios where the NAS behaves as the
-   PEP which acquires the source and/or destination endpoint group ID
+   PEP <strike><font color='red'>which</font></strike> <strong><font color='green'>that</font></strong> acquires the source and/or destination endpoint group ID
    from the AAA server, ACL policy enforcement based on the group
    identity without being encapsulated into packet headers might affect
    the forwarding performance.  Implementations need to evaluate the
-   operational tradeoff (flexibility brought to the network vs. the
+   operational <strike><font color='red'>tradeoff</font></strike> <strong><font color='green'>trade-off</font></strong> (flexibility brought to the network vs. the
    complexity of implementation) carefully.  Such assessment is out of
    scope for this document.
 
@@ -1156,12 +1158,14 @@ Table of Contents
 
    Some devices may not have built-in capabilities to enforce group-
    based match policies.  Hardware or software upgrades may be required
-   to support such feature by involved PEPs.
+   to support such <strike><font color='red'>feature</font></strike> <strong><font color='green'>features</font></strong> by involved PEPs.
 
 8.3.  Mapping Consistency
 
-   The specification requires that adequate setup is put in place to map
-   a Group ID to packet fields, typically managed by a controller.
+   <strike><font color='red'>The</font></strike>
+
+   <strong><font color='green'>This</font></strong> specification requires that adequate setup is put in place to
+   map a Group ID to packet fields, typically managed by a controller.
    Special care should be taken to ensure that such mapping is
    appropriately enforced when distinct mechanisms (RADIUS, etc.) are
    supported in network.
@@ -1174,12 +1178,13 @@ Table of Contents
    of [RFC9907].
 
    The "ietf-ucl-acl" YANG module defines a data model that is designed
-   to be accessed via YANG-based management protocols such as the
+   to be accessed via YANG-based management <strike><font color='red'>protocols</font></strike> <strong><font color='green'>protocols,</font></strong> such as the
    Network Configuration Protocol (NETCONF) [RFC6241] and RESTCONF
    [RFC8040].  These YANG-based management protocols (1) have to use a
    secure transport layer (e.g., Secure Shell (SSH) [RFC4252], TLS
-   [I-D.ietf-tls-rfc8446bis], and QUIC [RFC9000]) and (2) have to use
-   mutual authentication.
+   <strike><font color='red'>[I-D.ietf-tls-rfc8446bis],</font></strike>
+   <strong><font color='green'>[RFC9846],</font></strong> and QUIC [RFC9000]) and (2) have to use mutual
+   authentication.
 
    The Network Configuration Access Control Model (NACM) [RFC8341]
    provides the means to restrict access for particular NETCONF or
@@ -1214,11 +1219,11 @@ Table of Contents
 
    *  /acl:acls/acl:acl/acl:aces/acl:ace/ucl:effective-schedule:
 
-      It specifies the secheduling of ACLs.  Unauthorized write access
-      to this data node may allow intruders to alter it.  This may lead
-      to service disruption or unavailability.  Strict access control
-      must be implemented for write operations on this subtree to ensure
-      that only authorized users can modify it.
+      It specifies the <strike><font color='red'>secheduling</font></strike> <strong><font color='green'>scheduling</font></strong> of ACLs.  Unauthorized write access to
+      this data node may allow intruders to alter it.  This may lead to
+      service disruption or unavailability.  Strict access control must
+      be implemented for write operations on this subtree to ensure that
+      only authorized users can modify it.
 
    Some of the readable data nodes in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -1232,6 +1237,14 @@ Table of Contents
       It specifies when the access control entry rules are applied.  An
       unauthorized read access of the list will allow the attacker to
       determine which rules are applied, to better craft an attack.
+
+   <strong><font color='green'>There are no particularly sensitive RPC or action operations.
+
+   This YANG module uses groupings from other YANG modules that define
+   nodes that may be considered sensitive or vulnerable in network
+   environments.  Refer to the Security Considerations of [RFC9922] for
+   information as to which nodes may be considered sensitive or
+   vulnerable in network environments.</font></strong>
 
 9.2.  RADIUS
 
@@ -1248,41 +1261,53 @@ Table of Contents
 
 10.1.  YANG
 
-   This document registers the following URIs in the "IETF XML Registry"
-   [RFC3688].
+   <strike><font color='red'>This document registers</font></strike>
+
+   <strong><font color='green'>IANA has assigned</font></strong> the following <strike><font color='red'>URIs</font></strike> <strong><font color='green'>URI</font></strong> in the <strong><font color='green'>"ns" registry within the</font></strong>
+   "IETF XML Registry"
+   <strike><font color='red'>[RFC3688].</font></strike> <strong><font color='green'>group [RFC3688]:</font></strong>
 
    URI:  urn:ietf:params:xml:ns:yang:ietf-ucl-acl
+   Registrant Contact:  The <strike><font color='red'>IESG.</font></strike> <strong><font color='green'>IESG</font></strong>
+   XML: <strike><font color='red'>N/A,</font></strike>  <strong><font color='green'>N/A;</font></strong> the requested URI is an XML namespace.
 
-   Registrant Contact:  The IESG.
+   <strike><font color='red'>This document registers</font></strike>
 
-   XML:  N/A, the requested URI is an XML namespace.
+   <strong><font color='green'>IANA has registered</font></strong> the following YANG <strike><font color='red'>modules</font></strike> <strong><font color='green'>module</font></strong> in the "YANG Module
+   Names" registry <strike><font color='red'>[RFC6020].
 
-   This document registers the following YANG modules in the "YANG
-   Module Names" registry [RFC6020].
+           name:</font></strike> <strong><font color='green'>[RFC6020] within the "YANG Parameters" registry
+   group:
 
-   name:  ietf-ucl-acl
-
-   prefix:  ucl
-
-   namespace:  urn:ietf:params:xml:ns:yang:ietf-ucl-acl
-
-   maintained by IANA?  N
-
-   reference:  RFC XXXX
+   Name:</font></strong>  ietf-ucl-acl
+           <strike><font color='red'>prefix:             ucl
+           namespace:          urn:ietf:params:xml:ns:yang:ietf-ucl-acl
+           maintained</font></strike>
+   <strong><font color='green'>Maintained</font></strong> by IANA?  N
+           <strike><font color='red'>reference:</font></strike>
+   <strong><font color='green'>Namespace:  urn:ietf:params:xml:ns:yang:ietf-ucl-acl
+   Prefix:  ucl
+   Reference:</font></strong>  RFC XXXX
 
 10.2.  RADIUS
 
-   This document requests IANA to assign a new RADIUS attribute type in
-   the 241-245 range from the IANA registry "Radius Attribute Types"
-   [RADIUS-Types]:
+   <strike><font color='red'>This document requests</font></strike>
 
-       +=======+======================+===========+===============+
-       | Value | Description          | Data Type | Reference     |
-       +=======+======================+===========+===============+
-       | TBA1  | User-Access-Group-ID | string    | This-Document |
-       +-------+----------------------+-----------+---------------+
+   IANA <strike><font color='red'>to assign</font></strike> <strong><font color='green'>has assigned</font></strong> a <strike><font color='red'>new</font></strike> RADIUS attribute type in the 241-245 range <strike><font color='red'>from</font></strike> <strong><font color='green'>in</font></strong> the <strike><font color='red'>IANA registry "Radius</font></strike>
+   <strong><font color='green'>"RADIUS</font></strong> Attribute Types"
+   <strike><font color='red'>[RADIUS-Types]:
 
-                        Table 5: RADIUS Attribute
+       +=======+======================+===========+===============+</font></strike> <strong><font color='green'>registry [RADIUS-Types] as follows:
+
+         +========+======================+===========+===========+</font></strong>
+         | Value  | Description          | Data Type | Reference |
+       <strike><font color='red'>+=======+======================+===========+===============+</font></strike>
+         <strong><font color='green'>+========+======================+===========+===========+</font></strong>
+         | <strike><font color='red'>TBA1</font></strike> <strong><font color='green'>241.12</font></strong> | User-Access-Group-ID | string    | <strike><font color='red'>This-Document</font></strike> <strong><font color='green'>RFC XXXX</font></strong>  |
+       <strike><font color='red'>+-------+----------------------+-----------+---------------+</font></strike>
+         <strong><font color='green'>+--------+----------------------+-----------+-----------+</font></strong>
+
+                         Table 5: RADIUS Attribute
 
 11.  References
 
@@ -1358,20 +1383,19 @@ Table of Contents
    [I-D.ietf-radext-radiusdtls-bis]
               Rieckers, J., Cullen, M., <strong><font color='green'>Ed.,</font></strong> and S. Winter, "RadSec:
               RADIUS over Transport Layer Security (TLS) and Datagram
-              Transport Layer Security (DTLS)", Work in Progress,
-              Internet-Draft,
-              <strike><font color='red'>draft-ietf-radext-radiusdtls-bis-15, 23 February</font></strike> <strong><font color='green'>draft-ietf-radext-radiusdtls-bis-16, 5 May</font></strong>
-              2026,
+              Transport Layer Security (DTLS)", Work in Progress, <strike><font color='red'>Internet-Draft,
+              draft-ietf-radext-radiusdtls-bis-15, 23 February</font></strike>
+              <strong><font color='green'>July</font></strong> 2026,
               <strike><font color='red'>&lt;https://datatracker.ietf.org/doc/html/draft-ietf-radext-
-              radiusdtls-bis-15&gt;.</font></strike> <strong><font color='green'>&lt;https://datatracker.ietf.org/doc/html/draft-ietf-
-              radext-radiusdtls-bis-16&gt;.</font></strong>
+              radiusdtls-bis-15&gt;.
 
    [I-D.ietf-tls-rfc8446bis]
               Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", Work in Progress, Internet-Draft, draft-
               ietf-tls-rfc8446bis-14, 13 September 2025,
               &lt;https://datatracker.ietf.org/doc/html/draft-ietf-tls-
-              rfc8446bis-14&gt;.
+              rfc8446bis-14&gt;.</font></strike> <strong><font color='green'>&lt;https://datatracker.ietf.org/doc/html/draft-
+              ietf-radext-radiusdtls-bis-17&gt;.</font></strong>
 
    [I-D.smith-vxlan-group-policy]
               Smith, M. and L. Kreeger, "VXLAN Group Policy Option",
@@ -1495,7 +1519,11 @@ Table of Contents
               Access Control (MAC) Addresses: Context, Network Impacts,
               and Use Cases", RFC 9797, DOI 10.17487/RFC9797, June 2025,
               <strike><font color='red'>&lt;https://www.rfc-editor.org/rfc/rfc9797&gt;.</font></strike>
-              <strong><font color='green'>&lt;https://www.rfc-editor.org/info/rfc9797&gt;.</font></strong>
+              <strong><font color='green'>&lt;https://www.rfc-editor.org/info/rfc9797&gt;.
+
+   [RFC9846]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 9846, DOI 10.17487/RFC9846, July 2026,
+              &lt;https://www.rfc-editor.org/info/rfc9846&gt;.</font></strong>
 
    [RFC9899]  Gonzalez de Dios, O., Barguil, S., Boucadair, M., and Q.
               Wu, "Extensions to the YANG Data Model for Access Control
@@ -1507,24 +1535,25 @@ Table of Contents
               Data Models", BCP 216, RFC 9907, DOI 10.17487/RFC9907,
               March 2026, <strike><font color='red'>&lt;https://www.rfc-editor.org/rfc/rfc9907&gt;.</font></strike> <strong><font color='green'>&lt;https://www.rfc-editor.org/info/rfc9907&gt;.</font></strong>
 
-Appendix A.  Examples Usage
+Appendix A.  <strike><font color='red'>Examples</font></strike>  Usage <strong><font color='green'>Examples</font></strong>
 
-A.1.  Configuring the Controller Using Group based ACL
+A.1.  Configuring the Controller Using <strike><font color='red'>Group based</font></strike> <strong><font color='green'>the Group-Based</font></strong> ACL
 
    Let's consider an organization that would like to manage the access
-   of R&amp;D employees that bring personally owned devices (BYOD) into the
+   of R&amp;D employees <strike><font color='red'>that</font></strike> <strong><font color='green'>who</font></strong> bring personally owned devices (BYOD) into the
    workplace.
 
    The access requirements are as follows:
 
-   *  Permit traffic from R&amp;D BYOD of employees, destined to R&amp;D
-      employees' devices every work day from 8:00:00 to 18:00:00 UTC,
-      starting in January 1st, 2026.
+   *  Permit traffic from R&amp;D <strike><font color='red'>BYOD of employees,</font></strike> <strong><font color='green'>employee BYODs,</font></strong> destined to R&amp;D employees' <strike><font color='red'>devices</font></strike>
+      <strong><font color='green'>devices,</font></strong> every work day from 8:00:00 to 18:00:00 UTC, starting <strike><font color='red'>in</font></strike> <strong><font color='green'>on</font></strong>
+      January <strike><font color='red'>1st,</font></strike> <strong><font color='green'>1,</font></strong> 2026.
 
-   *  Deny traffic from R&amp;D BYOD of employees, destined to finance
-      servers located in the enterprise DC network starting at 8:30:00
-      of January 20, 2026 with an offset of -08:00 from UTC (Pacific
-      Standard Time) and ending at 18:00:00 in Pacific Standard Time on
+   *  Deny traffic from R&amp;D <strike><font color='red'>BYOD of employees,</font></strike> <strong><font color='green'>employee BYODs,</font></strong> destined to finance servers
+      located in the enterprise DC <strike><font color='red'>network</font></strike> <strong><font color='green'>network,</font></strong> starting at 8:30:00
+      <strike><font color='red'>of</font></strike> <strong><font color='green'>on</font></strong>
+      January 20, <strike><font color='red'>2026</font></strike> <strong><font color='green'>2026,</font></strong> with an offset of -08:00 from UTC (Pacific
+      Standard <strike><font color='red'>Time)</font></strike> <strong><font color='green'>Time),</font></strong> and ending at 18:00:00 in Pacific Standard Time on
       December 31, 2026.
 
    The example shown in Figure 3 illustrates the configuration of an SDN
@@ -1619,19 +1648,19 @@ A.1.  Configuring the Controller Using Group based ACL
 
                    Figure 3: Example of UCL Configuration
 
-A.2.  Configuring a PEP Using Group-based ACL
+A.2.  Configuring a PEP Using <strike><font color='red'>Group-based</font></strike> <strong><font color='green'>the Group-Based</font></strong> ACL
 
-   This section illustrates an example to configure a PEP using the
+   This section illustrates an example <strike><font color='red'>to configure</font></strike> <strong><font color='green'>of configuring</font></strong> a PEP using the
    group-based ACL.
 
-   The PEP which enforces group-based ACL may acquire group identities
+   The PEP <strike><font color='red'>which</font></strike> <strong><font color='green'>that</font></strong> enforces <strong><font color='green'>a</font></strong> group-based ACL may acquire group identities
    from the AAA server if working as a NAS authenticating both the
-   source endpoint and the destination endpoint users.  Another case for
-   a PEP enforcing a group-based ACL is to obtain the group identity of
+   source endpoint and <strike><font color='red'>the</font></strike> destination endpoint users.  Another case for a
+   PEP enforcing a group-based ACL is to obtain the group identity of
    the source endpoint directly from the packet field
    [I-D.smith-vxlan-group-policy].
 
-   Assume the mapping between device group ID and IP addresses is
+   Assume the mapping between <strong><font color='green'>a</font></strong> device group ID and IP addresses is
    predefined or acquired via device authentication.  Figure 4 shows the
    ACL configuration delivered from the controller to the PEP.  This
    example is consistent with the example presented in Appendix A.1.
@@ -1819,21 +1848,25 @@ A.2.  Configuring a PEP Using Group-based ACL
 
                Figure 5: Example of PEP Configuration (ipv6)
 
-A.3.  Configuring PEPs Using Address-based ACLs
+A.3.  Configuring <strike><font color='red'>PEPs</font></strike> <strong><font color='green'>a PEP</font></strong> Using <strike><font color='red'>Address-based ACLs
 
-   The section describes an example of configuring a PEP using IP
-   address based ACL.  IP address based access control policies could be
+   The</font></strike> <strong><font color='green'>an Address-Based ACL
+
+   This</font></strong> section describes an example of configuring a PEP using <strike><font color='red'>IP
+   address based</font></strike> <strong><font color='green'>an IP-
+   address-based</font></strong> ACL.  <strike><font color='red'>IP address based</font></strike>  <strong><font color='green'>IP-address-based</font></strong> access control policies could be
    applied to the PEP that may not understand the group information
-   (e.g., firewall).
+   (e.g., <strong><font color='green'>a</font></strong> firewall).
 
    Assume an employee in the R&amp;D department accesses the network
    wirelessly from a non-corporate laptop.  The SDN controller
    associates the user group to which the employee belongs with the user
    address according to steps 1 to 4 in Section 4.1.
 
-   Assume the mapping between device group ID and IP addresses is
+   Assume the mapping between <strong><font color='green'>a</font></strong> device group ID and IP addresses is
    predefined or acquired via device authentication.  Figure 6 shows an
-   IPv4 address based ACL configuration delivered from the controller to
+   <strike><font color='red'>IPv4 address based</font></strike>
+   <strong><font color='green'>IPv4-address-based</font></strong> ACL configuration delivered from the controller to
    the PEP.  This example is consistent with the example presented in
    Appendix A.1.
 
@@ -1988,10 +2021,11 @@ A.3.  Configuring PEPs Using Address-based ACLs
 
 Acknowledgments
 
-   This work has benefited from the discussions of User-group-based
-   Security Policy over the years.  In particular,
+   This work has benefited from the discussions of <strike><font color='red'>User-group-based
+   Security Policy</font></strike> <strong><font color='green'>user-group-based
+   security policies</font></strong> over the years.  In particular,
    [I-D.you-i2nsf-user-group-based-policy] and
-   [I-D.yizhou-anima-ip-to-access-control-groups] provided mechanisms to
+   [I-D.yizhou-anima-ip-to-access-control-groups] <strike><font color='red'>provided</font></strike> <strong><font color='green'>provid</font></strong> mechanisms to
    establish a mapping between the IP address/prefix of users and access
    control group IDs.  The authors would like to thank Jianjie You, Myo
    Zarny, Christian Jacquenet, and Yizhou Li for their early
@@ -2001,7 +2035,7 @@ Acknowledgments
    Somers-Harris, Alan Dekok, Heikki Vatiainen, Wen Xiang, Wei Wang,
    Hongwei Li, and Jensen Zhang for their review and comments.
 
-   Thanks to Dhruv Dhody for the OPSDIR review, Alexander Pelov for
+   Thanks to Dhruv Dhody for the OPSDIR review, Alexander Pelov for <strong><font color='green'>the</font></strong>
    INTDIR review, Valery Smyslov for the SECDIR review, and Acee Lindem
    for the YANGDOCTORS review.
 
@@ -2009,7 +2043,7 @@ Acknowledgments
 
    Thanks to Christopher Inacio, Andy Newton, Charles Eckel, Éric
    Vyncke, Deb Cooley, Gorry Fairhurst, Gunter Van de Velde, Jim
-   Guichard, Ketan Talaulikar, and Mike Bishop for the IESG review.
+   Guichard, Ketan Talaulikar, and Mike Bishop for <strike><font color='red'>the</font></strike> <strong><font color='green'>their</font></strong> IESG <strike><font color='red'>review.</font></strike> <strong><font color='green'>reviews.</font></strong>
 
 Authors' Addresses
 
