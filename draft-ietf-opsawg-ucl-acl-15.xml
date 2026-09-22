@@ -662,7 +662,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
         <t><xref target="ucl-tree"/> provides the tree structure of the "ietf-ucl-acl" module.</t>
         <figure anchor="ucl-tree">
           <name>UCL Extension</name>
-          <artwork align="left"><![CDATA[
+          <sourcecode type="yangtree" align="left"><![CDATA[
 module: ietf-ucl-acl
 
   augment /acl:acls:
@@ -722,7 +722,7 @@ module: ietf-ucl-acl
                 +--rw byyearmonth*              uint32
                 +--rw bysetpos*                 int32
                 +--rw workweek-start?           schedule:weekday
-                +--rw exception-dates*          yang:date-and-time]]></artwork>
+                +--rw exception-dates*          yang:date-and-time]]></sourcecode>
         </figure>
         <t>The first part of the "ietf-ucl-acl" module augments the "acl" list in the
    "ietf-access-control-list" module <xref target="RFC8519"/> with an "endpoint-groups" container
@@ -763,7 +763,7 @@ module ietf-ucl-acl {
   }
 
   organization
-    "IETF OPSWG Working Group";
+    "IETF OPSAWG Working Group";
   contact
     "WG Web:  https://datatracker.ietf.org/wg/opsawg/
      WG List: OPSAWG <mailto:opsawg@ietf.org>
@@ -778,8 +778,8 @@ module ietf-ucl-acl {
                <mailto:d.king@lancaster.ac.uk>";
   description
     "The User-group-based Control List (UCL) YANG module augments
-     the IETF Access Control Lists (ACLs) module. UCL is meant to
-     ensure consistent enforcement of ACL policies based on
+     the IETF Access Control Lists (ACLs) module.  UCL is meant
+     to ensure consistent enforcement of ACL policies based on
      the group identity.
 
      Copyright (c) 2026 IETF Trust and the persons identified
@@ -876,12 +876,12 @@ module ietf-ucl-acl {
     description
       "An ACL that matches based on an endpoint group identity,
        which can represent the collective identity of a group of
-       authenticated users, end devices, or applications.
-       An endpoint group identity may be carried in the outer/inner 
+       authenticated users, end devices, or applications.  An
+       endpoint group identity may be carried in the outer/inner 
        packet header (e.g., via Network Virtualization over Layer 3
        (NVO3) encapsulation) or may not correspond to any field in
-       the packet header. Matching on Layer 4 header fields may also
-       exist in the ACEs.";
+       the packet header.  Matching on Layer 4 header fields may
+       also exist in the ACEs.";
   }
   
   identity mixed-ipv4-group-type {
@@ -892,7 +892,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the IPv4 header and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users, end devices, or applications. Matching on Layer 4 
+       users, end devices, or applications.  Matching on Layer 4 
        header fields may also exist in the ACEs.";
   }
   
@@ -904,7 +904,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the IPv6 header and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users, end devices, or applications. Matching on Layer 4 
+       users, end devices, or applications.  Matching on Layer 4 
        header fields may also exist in the ACEs.";
   }
   
@@ -930,7 +930,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the Ethernet header and endpoint group identities,
        which can represent the collective identity of a group of
-       authenticated users, end devices, or applications. Matching 
+       authenticated users, end devices, or applications.  Matching 
        on Layer 4 header fields may also exist in the ACEs.";
   }
   
@@ -970,11 +970,11 @@ module ietf-ucl-acl {
     base ucl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in the Ethernet header, IPv4 header, IPv6 header, and endpoint 
-       group identities, which can represent the collective identity 
-       of a group of authenticated users, end devices, or
-       applications. Matching on Layer 4 header fields may also exist 
-       in the ACEs.";
+       in the Ethernet header, IPv4 header, IPv6 header, and 
+       endpoint group identities, which can represent the collective 
+       identity of a group of authenticated users, end devices, or
+       applications.  Matching on Layer 4 header fields may also 
+       exist in the ACEs.";
   }  
     
   identity endpoint-group-type {
