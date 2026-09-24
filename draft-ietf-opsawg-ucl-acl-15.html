@@ -13,9 +13,11 @@
        This document defines a YANG data model for policy-based network access
    control, which provides enforcement of
    network access control policies based on group identity. This YANG data model extends Access Control Lists (ACLs) with date and time parameters to support schedule-aware policy enforcement. 
-       Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism, used to enforce policy-based network access control, that eases the maintenance
+       Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism that eases the maintenance
    of the mapping between a user group identifier and a set of packet header 
-   fields. Moreover, this document defines a Remote Authentication Dial-in
+   fields to enforce policy-based network access control. 
+   
+   Moreover, this document defines a Remote Authentication Dial-in
    User Service (RADIUS) attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information. 
@@ -1243,8 +1245,8 @@ li > p:last-of-type:only-child {
 <table class="ears">
 <thead><tr>
 <td class="left">RFC 0000</td>
-<td class="center">A Policy-based Network Access Control</td>
-<td class="right">April 2026</td>
+<td class="center">A Policy-Based Network Access Control</td>
+<td class="right">September 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ma, et al.</td>
@@ -1263,7 +1265,7 @@ li > p:last-of-type:only-child {
 <dd class="category">Standards Track</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04" class="published">April 2026</time>
+<time datetime="2026-09" class="published">September 2026</time>
     </dd>
 <dt class="label-issn">ISSN:</dt>
 <dd class="issn">2070-1721</dd>
@@ -1297,9 +1299,11 @@ li > p:last-of-type:only-child {
 <p id="section-abstract-1">This document defines a YANG data model for policy-based network access
    control, which provides enforcement of
    network access control policies based on group identity. This YANG data model extends Access Control Lists (ACLs) with date and time parameters to support schedule-aware policy enforcement.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism, used to enforce policy-based network access control, that eases the maintenance
+<p id="section-abstract-2">Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism that eases the maintenance
    of the mapping between a user group identifier and a set of packet header 
-   fields. Moreover, this document defines a Remote Authentication Dial-in
+   fields to enforce policy-based network access control. 
+   
+   Moreover, this document defines a Remote Authentication Dial-in
    User Service (RADIUS) attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
@@ -1491,7 +1495,7 @@ li > p:last-of-type:only-child {
 LAN (WLAN) and VPN clients, as well as back-end servers based on Virtual Machines
 (VMs), can move; their IP addresses could change as a
 result. Furthermore, mechanisms such as IPv6 temporary addresses <span>[<a href="#RFC8981" class="cite xref">RFC8981</a>]</span> and Network Address Port Translation (NAPT) <span>[<a href="#RFC3022" class="cite xref">RFC3022</a>]</span> may further contribute to address instability and non-uniqueness. This complicates the consistent and efficient access control policy enforcement relying on IP/transport fields (e.g., the
-5-tuple). IP address-based policies may not be flexible
+5-tuple). IP-address-based policies may not be flexible
 enough to accommodate endpoints with volatile IP addresses.<a href="#section-1-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-2.2">
@@ -1522,7 +1526,7 @@ grant to the network.<a href="#section-1-2.2.1" class="pilcrow">¶</a></p>
    ACL defined in <a href="#sec-UCL" class="auto internal xref">Section 5.2</a> does not limit how it can be used.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">Specifically in scenarios where network access is triggered by user authentication, this document also defines a mechanism to establish a mapping between (1) the
    user group identifier (ID) and (2) common IP packet header fields and other
-   encapsulating packet data (e.g., Media Access Control (MAC) address) to execute the policy-based access control.
+   encapsulating packet data (e.g., a Media Access Control (MAC) address) to execute the policy-based access control.
    Additionally, the document defines a Remote Authentication Dial-in
    User Service (RADIUS) <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span> attribute that is used to
    communicate the user group identifier as part of identification and
@@ -1564,7 +1568,7 @@ dedicated packet fields. Group-Based Policy (GBP), discussed in <span><a href="h
         <dt id="section-2-6.1">Enterprise device:</dt>
         <dd style="margin-left: 1.5em" id="section-2-6.2">
           <p id="section-2-6.2.1">A device that falls under the access control domain of
-   centrally managed authority (enterprise administrator, typically).
+   a centrally managed authority (enterprise administrator, typically).
    An enterprise device provides compute, memory, storage, and networking capabilities and connects to a network.<a href="#section-2-6.2.1" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -1646,9 +1650,9 @@ both at the network device level and at the network/administrative domain level.
    enterprise devices, and applications, and to associate ACLs with endpoint
    groups so that endpoints in each group can share a group of ACL rules.
    This approach greatly reduces
-   the overhead of the administrators and optimizes the ACL resources.<a href="#section-3-1" class="pilcrow">¶</a></p>
+   the overhead of the administrators and optimizes ACL resources.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The network ACLs can be provisioned on devices using specific
-   mechanisms, such as described in <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> or <span>[<a href="#RFC9899" class="cite xref">RFC9899</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+   mechanisms, such as those described in <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> or <span>[<a href="#RFC9899" class="cite xref">RFC9899</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Different policies may need to be applied in different contextual situations.
    For example, companies may restrict (or grant) employees access to specific
    internal or external resources during work hours,
@@ -1683,7 +1687,7 @@ both at the network device level and at the network/administrative domain level.
 An SDN controller may interact with an Authentication, Authorization, and Accounting (AAA) <span>[<a href="#RFC3539" class="cite xref">RFC3539</a>]</span> server or a Network Access Server (NAS) <span>[<a href="#RFC7542" class="cite xref">RFC7542</a>]</span>.<a href="#section-4.1-2.2.2" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.3">
-            <p id="section-4.1-2.3.1">A NAS entity that handles authentication requests. The NAS interacts with an AAA server to complete user authentication using protocols like RADIUS <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.3.1">A NAS entity that handles authentication requests. The NAS interacts with a AAA server to complete user authentication using protocols like RADIUS <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.<a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2.3.2">
 A new RADIUS attribute is defined in <a href="#sec-radius" class="auto internal xref">Section 6</a> for this purpose.<a href="#section-4.1-2.3.2" class="pilcrow">¶</a></p>
 </li>
@@ -1691,7 +1695,7 @@ A new RADIUS attribute is defined in <a href="#sec-radius" class="auto internal 
             <p id="section-4.1-2.4.1">The AAA server provides a collection of authentication, authorization, and accounting functions. The AAA server is responsible for centralized user information management. The AAA server is preconfigured with user credentials (e.g., username and password), possible group identities, and related user attributes (users may be divided into different groups based on different user attributes).<a href="#section-4.1-2.4.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-4.1-2.5">
-            <p id="section-4.1-2.5.1">PEP is the central entity that is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers ALC policies based on packet header fields to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint-group IDs and act upon the endpoint-group ID-based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in <span><a href="https://www.rfc-editor.org/rfc/rfc9638#section-6.2.3" class="relref">Section 6.2.3</a> of [<a href="#RFC9638" class="cite xref">RFC9638</a>]</span>).<a href="#section-4.1-2.5.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-2.5.1">A PEP is the central entity that is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers ACL policies based on packet header fields to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint group IDs and act upon the corresponding group-based ACL policies (e.g., a group identifier may be carried in packet headers, as discussed in <span><a href="https://www.rfc-editor.org/rfc/rfc9638#section-6.2.3" class="relref">Section 6.2.3</a> of [<a href="#RFC9638" class="cite xref">RFC9638</a>]</span>).<a href="#section-4.1-2.5.1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2.5.2">
 Multiple PEPs may be involved in a network.<a href="#section-4.1-2.5.2" class="pilcrow">¶</a></p>
 <p id="section-4.1-2.5.3">
@@ -1800,7 +1804,7 @@ in <a href="#sec-UCL" class="auto internal xref">Section 5.2</a>. An example is 
 <dt id="section-4.1-6.3">Step 2:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-6.4">
             <p id="section-4.1-6.4.1">When a user first logs onto the network, they are
-   required to be authenticated (e.g., using username and password)
+   required to be authenticated (e.g., using a username and password)
    at the NAS.<a href="#section-4.1-6.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
@@ -1821,29 +1825,30 @@ in <a href="#sec-UCL" class="auto internal xref">Section 5.2</a>. An example is 
     user group with the identifier returned to the NAS
     as the authentication result (see <a href="#sec-radius" class="auto internal xref">Section 6</a>).
     If the authentication fails, the user is not assigned any user
-    group, which also means that the user has no access (i.e., Access-Reject returned) or the user
+    group, which also means that the user has no access (i.e., an Access-Reject is returned) or the user
     is assigned a special group with very limited access permissions
     for the network (as a function of the local policy). ACLs are
-    enforced so that flows from that IP address are discarded
+    enforced so that flows from the user's IP address are discarded
     (or rate-limited) by the network.<a href="#section-4.1-6.8.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-6.9"></dt>
           <dd style="margin-left: 1.5em" id="section-4.1-6.10">
-            <p id="section-4.1-6.10.1">In some implementations, the AAA server can be integrated with an SDN controller.<a href="#section-4.1-6.10.1" class="pilcrow">¶</a></p>
+            <p id="section-4.1-6.10.1">In some implementations, the AAA server can be integrated with the SDN controller.<a href="#section-4.1-6.10.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-6.11">Step 4:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-6.12">
-            <p id="section-4.1-6.12.1">Either the AAA server or the NAS notifies an SDN controller
+            <p id="section-4.1-6.12.1">Either the AAA server or the NAS notifies the SDN controller
    of the mapping between the user group ID and related common packet
-   header attributes (e.g., the 5-tuple). The exact details of how such notification is performed are out scope of this specification.<a href="#section-4.1-6.12.1" class="pilcrow">¶</a></p>
+   header attributes (e.g., the 5-tuple). The exact details of how such notification is performed are out of scope of this specification.<a href="#section-4.1-6.12.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 <dt id="section-4.1-6.13">Step 5:</dt>
           <dd style="margin-left: 1.5em" id="section-4.1-6.14">
-            <p id="section-4.1-6.14.1">Either group-based or packet header field-based access control policies
-   are maintained on relevant PEPs under the SDN controller's management.
+            <p id="section-4.1-6.14.1">Either group-based access control policies or access control policies
+   based on packet header fields are maintained on relevant PEPs under
+   the SDN controller's management.
    Both types of ACL policy may exist on
    the PEP. Appendices <a href="#PEP-ucl" class="auto internal xref">A.2</a> and <a href="#PEP-acl" class="auto internal xref">A.3</a> elaborate on each case.<a href="#section-4.1-6.14.1" class="pilcrow">¶</a></p>
 </dd>
@@ -1865,7 +1870,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
           <h4 id="name-user-group">
 <a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-user-group" class="section-name selfRef">User Group</a>
           </h4>
-<p id="section-4.2.1-1">The user group is determined by a set of predefined policy criteria
+<p id="section-4.2.1-1">A user group is determined by a set of predefined policy criteria
    (e.g., source IP address, geolocation data, time of day, or device certificate).
    It uses an identifier (user group ID) to represent the collective identity of
    a group of users. Users may be moved to different user groups if there is a change in their
@@ -1883,7 +1888,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
    an example of how user group definitions may be characterized. User
    groups may share several common criteria.  That is, user group
    criteria are not mutually exclusive.  For example, the policy
-   criteria of user groups R&amp;D Regular and R&amp;D BYOD may share the same
+   criteria of the user groups R&amp;D Regular and R&amp;D BYOD may share the same
    set of users that belong to the R&amp;D organization but differ only in
    the type of clients (firm-issued clients vs. users' personal
    clients).  Likewise, the same user may be assigned to different user
@@ -1933,15 +1938,15 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
           <h4 id="name-device-group">
 <a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-device-group" class="section-name selfRef">Device Group</a>
           </h4>
-<p id="section-4.2.2-1">The device group ID is an identifier that represents the collective
+<p id="section-4.2.2-1">A device group ID is an identifier that represents the collective
    identity of a group of enterprise devices.
    <a href="#dg-example" class="auto internal xref">Table 2</a> shows an example
    of how device group definitions may be characterized.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
-<span id="name-device-group-example"></span><div id="dg-example">
+<span id="name-device-group-examples"></span><div id="dg-example">
 <table class="center" id="table-2">
             <caption>
 <a href="#table-2" class="selfRef">Table 2</a>:
-<a href="#name-device-group-example" class="selfRef">Device Group Example</a>
+<a href="#name-device-group-examples" class="selfRef">Device Group Examples</a>
             </caption>
 <thead>
               <tr>
@@ -1954,7 +1959,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">Workflow</td>
                 <td class="text-left" rowspan="1" colspan="1">bar-40</td>
-                <td class="text-left" rowspan="1" colspan="1">Workflow  resource servers</td>
+                <td class="text-left" rowspan="1" colspan="1">Workflow resource servers</td>
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">R&amp;D Resource</td>
@@ -1970,7 +1975,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
           </table>
 </div>
 <p id="section-4.2.2-3">Matching abstract device group IDs instead of specified addresses in
-   ACL polices helps shield the consequences of address change (e.g.,
+   ACL policies helps shield the consequences of address changes (e.g.,
    back-end VM-based server migration).<a href="#section-4.2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1982,7 +1987,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
 <p id="section-4.2.3-1">An application group is a collection of applications that share common access control policies.
    A device may run multiple applications, and different policies might need to be
    applied to the applications and device. A single application may need to run on
-   multiple devices/VMs/containers; the abstraction of application group eases the
+   multiple devices/VMs/containers; the abstraction of an application group eases the
    process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
    <a href="#ag-example" class="auto internal xref">Table 3</a> shows an example of how application group definitions may be characterized.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
 <span id="name-application-group-examples"></span><div id="ag-example">
@@ -2055,7 +2060,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
 <p id="section-5.1-2"><a href="#ucl-tree" class="auto internal xref">Figure 2</a> provides the tree structure of the "ietf-ucl-acl" module.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <span id="name-ucl-extension"></span><div id="ucl-tree">
 <figure id="figure-2">
-          <div class="alignLeft art-text artwork" id="section-5.1-3.1">
+          <div class="breakable lang-yangtree sourcecode" id="section-5.1-3.1">
 <pre>
 module: ietf-ucl-acl
 
@@ -2124,16 +2129,16 @@ module: ietf-ucl-acl
 </div>
 <p id="section-5.1-4">The first part of the "ietf-ucl-acl" module augments the "acl" list in the
    "ietf-access-control-list" module <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> with an "endpoint-groups" container
-   that includes an "endpoint group" list, where each entry has a "group-id" that uniquely
+   that includes an "endpoint-group" list, where each entry has a "group-id" that uniquely
    identifies the endpoint group and a "group-type" parameter to specify the endpoint group type.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <p style="margin-left: 1.5em" id="section-5.1-5">"group-id" is defined as a string rather than an unsigned integer (e.g., uint32) to accommodate deployments that require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group ID" used to populate the policy. How the "group-id" string is mapped to the tagging or field in the packet header in an encapsulation scenario is outside the scope of this document. Augmentation may be considered in the future to cover encapsulation considerations.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 <p id="section-5.1-6">The second part of the "ietf-ucl-acl" module augments the "matches" container in the
    "ietf-access-control-list" module <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> so that a source and/or destination endpoint group index
    can be referenced as the match criteria.<a href="#section-5.1-6" class="pilcrow">¶</a></p>
 <p id="section-5.1-7">The third part of the module augments the "ace" list in the "ietf-access-control-list"
-   module <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> with date- and time-specific parameters to allow ACE to be
+   module <span>[<a href="#RFC8519" class="cite xref">RFC8519</a>]</span> with date- and time-specific parameters to allow an ACE to be
    activated based on a date/time condition. Two types of time ranges are defined,
-   which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
+   which reuse the "recurrence" and "period" groupings defined in the "ietf-schedule"
    YANG module in <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>, respectively.<a href="#section-5.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2165,9 +2170,9 @@ module ietf-ucl-acl {
   }
 
   organization
-    "IETF OPSWG Working Group";
+    "IETF OPSAWG Working Group";
   contact
-    "WG Web:  https://datatracker.ietf.org/wg/opsawg/
+    "WG Web:  &lt;https://datatracker.ietf.org/wg/opsawg/&gt;
      WG List: OPSAWG &lt;mailto:opsawg@ietf.org&gt;
 
      Editor:   Qiufang Ma
@@ -2180,8 +2185,8 @@ module ietf-ucl-acl {
                &lt;mailto:d.king@lancaster.ac.uk&gt;";
   description
     "The User-group-based Control List (UCL) YANG module augments
-     the IETF Access Control Lists (ACLs) module. UCL is meant to
-     ensure consistent enforcement of ACL policies based on
+     the IETF Access Control Lists (ACLs) module.  UCL is meant
+     to ensure consistent enforcement of ACL policies based on
      the group identity.
 
      Copyright (c) 2026 IETF Trust and the persons identified
@@ -2278,12 +2283,12 @@ module ietf-ucl-acl {
     description
       "An ACL that matches based on an endpoint group identity,
        which can represent the collective identity of a group of
-       authenticated users, end devices, or applications.
-       An endpoint group identity may be carried in the outer/inner
+       authenticated users, end devices, or applications.  An
+       endpoint group identity may be carried in the outer/inner
        packet header (e.g., via Network Virtualization over Layer 3
        (NVO3) encapsulation) or may not correspond to any field in
-       the packet header. Matching on Layer 4 header fields may also
-       exist in the ACEs.";
+       the packet header.  Matching on Layer 4 header fields may
+       also exist in the ACEs.";
   }
 
   identity mixed-ipv4-group-type {
@@ -2294,7 +2299,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the IPv4 header and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users, end devices, or applications. Matching on Layer 4
+       users, end devices, or applications.  Matching on Layer 4
        header fields may also exist in the ACEs.";
   }
 
@@ -2306,7 +2311,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the IPv6 header and endpoint group identities, which can
        represent the collective identity of a group of authenticated
-       users, end devices, or applications. Matching on Layer 4
+       users, end devices, or applications.  Matching on Layer 4
        header fields may also exist in the ACEs.";
   }
 
@@ -2332,7 +2337,7 @@ module ietf-ucl-acl {
       "An ACL that contains a mix of entries that match on fields
        in the Ethernet header and endpoint group identities,
        which can represent the collective identity of a group of
-       authenticated users, end devices, or applications. Matching
+       authenticated users, end devices, or applications.  Matching
        on Layer 4 header fields may also exist in the ACEs.";
   }
 
@@ -2372,11 +2377,11 @@ module ietf-ucl-acl {
     base ucl:group-acl-type;
     description
       "An ACL that contains a mix of entries that match on fields
-       in the Ethernet header, IPv4 header, IPv6 header, and endpoint
-       group identities, which can represent the collective identity
-       of a group of authenticated users, end devices, or
-       applications. Matching on Layer 4 header fields may also exist
-       in the ACEs.";
+       in the Ethernet header, IPv4 header, IPv6 header, and
+       endpoint group identities, which can represent the collective
+       identity of a group of authenticated users, end devices, or
+       applications.  Matching on Layer 4 header fields may also
+       exist in the ACEs.";
   }
 
   identity endpoint-group-type {
@@ -2505,15 +2510,15 @@ module ietf-ucl-acl {
       <h2 id="name-user-access-group-id-radius">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-user-access-group-id-radius" class="section-name selfRef">User-Access-Group-ID RADIUS Attribute</a>
       </h2>
-<p id="section-6-1">This section defines a User-Access-Group-ID RADIUS attribute, which is designed for user-centric access control scenarios where network access is triggered by user authentication and used to indicate the user group ID to be used by the NAS.
-For other endpoint group types, such as device group or application group, the identifiers are typically pre-provisioned
+<p id="section-6-1">This section defines the User-Access-Group-ID RADIUS attribute, which is designed for user-centric access control scenarios where network access is triggered by user authentication and used to indicate the user group ID to be used by the NAS.
+For other endpoint group types, such as device or application groups, the identifiers are typically preprovisioned
 on the SDN controller based on an inventory or an application registry.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">The User-Access-Group-ID RADIUS attribute is
 defined with a globally unique name. The definition of the attribute
 follows the guidelines in <span><a href="https://www.rfc-editor.org/rfc/rfc6929#section-2.7.1" class="relref">Section 2.7.1</a> of [<a href="#RFC6929" class="cite xref">RFC6929</a>]</span>. When
 the User-Access-Group-ID RADIUS attribute is present in the RADIUS
 Access-Accept, the system applies the related access control to the
-users after the user authenticates.<a href="#section-6-2" class="pilcrow">¶</a></p>
+user after the user authenticates.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">The User-Access-Group-ID Attribute is of type "string" as defined in
 <span><a href="https://www.rfc-editor.org/rfc/rfc8044#section-3.5" class="relref">Section 3.5</a> of [<a href="#RFC8044" class="cite xref">RFC8044</a>]</span>.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <p id="section-6-4">The User-Access-Group-ID Attribute <span class="bcp14">MAY</span> appear in a RADIUS
@@ -2540,7 +2545,7 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
         <dd style="margin-left: 1.5em" id="section-6-9.4">
           <p id="section-6-9.4.1">This field indicates the total length, in octets, of all fields of
    this attribute -- including the Type, Length, and Extended-Type -- and the
-   "Value".<a href="#section-6-9.4.1" class="pilcrow">¶</a></p>
+   Value.<a href="#section-6-9.4.1" class="pilcrow">¶</a></p>
 <p id="section-6-9.4.2">The Length <span class="bcp14">MUST</span> be 67 octets at most. The maximum length is 67 octets to accommodate the maximum group ID of 64 octets plus one octet for Type, one octet for Length, and one octet for Extended-Length.<a href="#section-6-9.4.2" class="pilcrow">¶</a></p>
 </dd>
         <dd class="break"></dd>
@@ -2562,7 +2567,7 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
       <h2 id="name-radius-attributes">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-radius-attributes" class="section-name selfRef">RADIUS Attributes</a>
       </h2>
-<p id="section-7-1"><a href="#rad-att" class="auto internal xref">Table 4</a> provides a guide that indicates what type of RADIUS packets
+<p id="section-7-1"><a href="#rad-att" class="auto internal xref">Table 4</a> provides a guide that indicates which types of RADIUS packets
    may contain a User-Access-Group-ID Attribute and in what
    quantity.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <span id="name-table-of-attributes"></span><div id="rad-att">
@@ -2630,11 +2635,11 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
         <h3 id="name-deployment-options">
 <a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-deployment-options" class="section-name selfRef">Deployment Options</a>
         </h3>
-<p id="section-8.1-1">The UCL model can be implemented in different ways.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-1">The UCL data model can be implemented in different ways.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1-2">In some cases, the UCL data model is implemented at the network/administrative domain
    level, where an SDN controller maintains the dynamic mapping from an endpoint
    group ID to IP/transport fields (e.g., the 5-tuple) and programs the PEPs with
-   IP-address or 5-tuple-based ACLs. In such cases, PEPs do not require implementing
+   IP-address-based or 5-tuple-based ACLs. In such cases, PEPs do not require implementing
    specific logic (including hardware) compared to the enforcement of conventional ACLs.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 <p id="section-8.1-3">It is possible for the UCL data model to be implemented at the device level.
    While it eliminates the need for an SDN controller to interact frequently
@@ -2645,7 +2650,7 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
    ID from the AAA server, ACL policy enforcement based on the group identity without
    being encapsulated into packet headers might affect the forwarding performance.
    Implementations need to evaluate the operational trade-off (flexibility brought
-   to the network vs. the complexity of implementation) carefully. Such assessment
+   to the network vs. the complexity of implementation) carefully. Such an assessment
    is out of scope for this document.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2655,7 +2660,7 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-hardware-software-implicati" class="section-name selfRef">Hardware/Software Implications</a>
         </h3>
 <p id="section-8.2-1">Some devices may not have built-in capabilities to enforce group-based match policies.
-   Hardware or software upgrades may be required to support such features by involved PEPs.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+   Hardware or software upgrades may be required to support such features by the involved PEPs.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mapping-consistency">
@@ -2663,10 +2668,10 @@ RADIUS packet.<a href="#section-6-7" class="pilcrow">¶</a></p>
         <h3 id="name-mapping-consistency">
 <a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-mapping-consistency" class="section-name selfRef">Mapping Consistency</a>
         </h3>
-<p id="section-8.3-1">This specification requires that adequate setup is put in place to map a Group ID to packet
+<p id="section-8.3-1">This specification requires that an adequate setup is put in place to map a group ID to packet
    fields, typically managed by a controller. Special care should be taken
    to ensure that such mapping is appropriately enforced when distinct
-   mechanisms (RADIUS, etc.) are supported in network.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+   mechanisms (RADIUS, etc.) are supported in the network.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2709,7 +2714,7 @@ which could be used to craft an attack.<a href="#section-9.1-5.1.2" class="pilcr
 </li>
           <li class="normal" id="section-9.1-5.2">
             <p id="section-9.1-5.2.1">/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches/ucl:endpoint-group:<a href="#section-9.1-5.2.1" class="pilcrow">¶</a></p>
-<p id="section-9.1-5.2.2">This subtree specifies a source and/or endpoint group index as match criteria in the
+<p id="section-9.1-5.2.2">This subtree specifies a source and/or destination endpoint group index as match criteria in the
 ACEs. Unauthorized write access to this data node may allow intruders to
 modify the group identity so as to permit access that should not be
 permitted, or deny access that should be permitted.<a href="#section-9.1-5.2.2" class="pilcrow">¶</a></p>
@@ -2729,8 +2734,8 @@ alter it. This may lead to service disruption or unavailability. Strict access c
 <ul class="normal">
 <li class="normal" id="section-9.1-7.1">
             <p id="section-9.1-7.1.1">/acl:acls/acl:acl/acl:aces/acl:ace/ucl:effective-schedule:<a href="#section-9.1-7.1.1" class="pilcrow">¶</a></p>
-<p id="section-9.1-7.1.2">It specifies when the access control entry rules are applied. An
-unauthorized read access of the list will allow the attacker to determine
+<p id="section-9.1-7.1.2">It specifies when the access control entry rules are applied. 
+Unauthorized read access of the list will allow an attacker to determine
 which rules are applied, to better craft an attack.<a href="#section-9.1-7.1.2" class="pilcrow">¶</a></p>
 </li>
         </ul>
@@ -2749,7 +2754,7 @@ sensitive or vulnerable in network environments.<a href="#section-9.1-9" class="
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-radius" class="section-name selfRef">RADIUS</a>
         </h3>
 <p id="section-9.2-1">RADIUS-related security considerations are discussed in <span>[<a href="#RFC2865" class="cite xref">RFC2865</a>]</span>.
-   An effort to deprecating insecure practices in RADIUS is provided in <span>[<a href="#I-D.ietf-radext-deprecating-radius" class="cite xref">I-D.ietf-radext-deprecating-radius</a>]</span>.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+   An effort to deprecate insecure practices in RADIUS is provided in <span>[<a href="#I-D.ietf-radext-deprecating-radius" class="cite xref">I-D.ietf-radext-deprecating-radius</a>]</span>.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.2-2">This document targets deployments where a trusted relationship is in
    place between the RADIUS client and server with communication
    optionally secured by IPsec or Transport Layer Security (TLS)
@@ -3033,13 +3038,12 @@ devices, every work day from 8:00:00 to 18:00:00 UTC, starting on January 1, 202
 </li>
           <li class="normal" id="appendix-A.1-3.2">
             <p id="appendix-A.1-3.2.1">Deny traffic from R&amp;D employee BYODs, destined to finance servers
-located in the enterprise DC network, starting at 8:30:00 on January 20,
+located in the enterprise data center (DC) network, starting at 8:30:00 on January 20,
 2026, with an offset of -08:00 from UTC (Pacific Standard Time), and ending
 at 18:00:00 in Pacific Standard Time on December 31, 2026.<a href="#appendix-A.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="appendix-A.1-4">The example shown in <a href="#ex-controller-ucl" class="auto internal xref">Figure 3</a> illustrates the configuration of an SDN controller
-   using the group-based ACL:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-4">The example shown in <a href="#ex-controller-ucl" class="auto internal xref">Figure 3</a> illustrates the configuration of an SDN controller using the group-based ACL:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
 <span id="name-example-of-ucl-configuratio"></span><div id="ex-controller-ucl">
 <figure id="figure-3">
           <div class="breakable lang-json sourcecode" id="appendix-A.1-5.1">
@@ -3132,7 +3136,7 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.<a href="#appendix-A.1
 }</pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
-<a href="#name-example-of-ucl-configuratio" class="selfRef">Example of UCL Configuration</a>
+<a href="#name-example-of-ucl-configuratio" class="selfRef">Example of UCL Configuration on the SDN Controller</a>
           </figcaption></figure>
 </div>
 </section>
@@ -3148,7 +3152,7 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.<a href="#appendix-A.1
    from the AAA server if working as a NAS authenticating both the
    source endpoint and destination endpoint users. Another case for
    a PEP enforcing a group-based ACL is to obtain the group identity of
-   the source endpoint directly from the packet field
+   the source endpoint directly from a packet field
    <span>[<a href="#I-D.smith-vxlan-group-policy" class="cite xref">I-D.smith-vxlan-group-policy</a>]</span>.<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
 <p id="appendix-A.2-3">Assume the mapping between a device group ID and IP addresses is
    predefined or acquired via device authentication. <a href="#ex-PEP-ucl" class="auto internal xref">Figure 4</a>
@@ -3353,11 +3357,11 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.<a href="#appendix-A.1
         </h3>
 <p id="appendix-A.3-1">This section describes an example of configuring a PEP using
    an IP-address-based ACL. IP-address-based access control policies could
-   be applied to the PEP that may not understand the group information (e.g., a firewall).<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
+   be applied to a PEP that may not understand the group information (e.g., a firewall).<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-2">Assume an employee in the R&amp;D department accesses the network
    wirelessly from a non-corporate laptop.
    The SDN controller associates the user group to which the employee
-   belongs with the user address according to steps 1 to 4 in <a href="#overview" class="auto internal xref">Section 4.1</a>.<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
+   belongs with the user's address according to steps 1 to 4 in <a href="#overview" class="auto internal xref">Section 4.1</a>.<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-3">Assume the mapping between a device group ID and IP addresses is
    predefined or acquired via device authentication. <a href="#ex-PEP-acl" class="auto internal xref">Figure 6</a>
    shows an IPv4-address-based ACL configuration delivered from
@@ -3533,11 +3537,11 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.<a href="#appendix-A.1
       </h2>
 <p id="appendix-B-1">This work has benefited from the discussions of user-group-based
    security policies over the years.  In particular, <span>[<a href="#I-D.you-i2nsf-user-group-based-policy" class="cite xref">I-D.you-i2nsf-user-group-based-policy</a>]</span>
-   and <span>[<a href="#I-D.yizhou-anima-ip-to-access-control-groups" class="cite xref">I-D.yizhou-anima-ip-to-access-control-groups</a>]</span> provid mechanisms to
+   and <span>[<a href="#I-D.yizhou-anima-ip-to-access-control-groups" class="cite xref">I-D.yizhou-anima-ip-to-access-control-groups</a>]</span> provide mechanisms to
    establish a mapping between the IP address/prefix of users and access
    control group IDs. The authors would like to thank <span class="contact-name">Jianjie You</span>, <span class="contact-name">Myo Zarny</span>, <span class="contact-name">Christian Jacquenet</span>, and <span class="contact-name">Yizhou Li</span> for their early contributions to these works.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
 <p id="appendix-B-2">Thanks to <span class="contact-name">Joe Clarke</span>, <span class="contact-name">Bill Fenner</span>, <span class="contact-name">Benoît Claise</span>, <span class="contact-name">Rob Wilton</span>, <span class="contact-name">David Somers-Harris</span>,
-   <span class="contact-name">Alan Dekok</span>, <span class="contact-name">Heikki Vatiainen</span>, <span class="contact-name">Wen Xiang</span>, <span class="contact-name">Wei Wang</span>, <span class="contact-name">Hongwei Li</span>, and <span class="contact-name">Jensen Zhang</span> for
+   <span class="contact-name">Alan DeKok</span>, <span class="contact-name">Heikki Vatiainen</span>, <span class="contact-name">Wen Xiang</span>, <span class="contact-name">Wei Wang</span>, <span class="contact-name">Hongwei Li</span>, and <span class="contact-name">Jensen Zhang</span> for
    their review and comments.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <p id="appendix-B-3">Thanks to <span class="contact-name">Dhruv Dhody</span> for the OPSDIR review, <span class="contact-name">Alexander Pelov</span> for the INTDIR review, <span class="contact-name">Valery Smyslov</span> for the SECDIR review, and <span class="contact-name">Acee Lindem</span> for the YANGDOCTORS review.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
 <p id="appendix-B-4">Thanks to <span class="contact-name">Mahesh Jethanandani</span> for the AD review.<a href="#appendix-B-4" class="pilcrow">¶</a></p>

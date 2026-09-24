@@ -9,8 +9,18 @@
 
 <rfc xmlns:xi="http://www.w3.org/2001/XInclude" ipr="trust200902" docName="draft-ietf-opsawg-ucl-acl-15" number="0000" category="std" consensus="true" updates="" obsoletes="" submissionType="IETF" tocInclude="true" sortRefs="true" symRefs="true" version="3" xml:lang="en">
 
+<!--[rfced] May we update the short title, which appears in the running
+header of the PDF, as follows to more closely match the document title?
+
+Original:
+   A Policy-Based Network Access Control
+
+Perhaps:
+   YANG and RADIUS for Network Access Control
+-->
+
   <front>
-    <title abbrev="A Policy-based Network Access Control">A YANG Data Model and RADIUS Extension for Policy-Based Network Access Control</title>
+    <title abbrev="A Policy-Based Network Access Control">A YANG Data Model and RADIUS Extension for Policy-Based Network Access Control</title>
     <seriesInfo name="RFC" value="0000"/>
     <author fullname="Qiufang Ma" role="editor">
       <organization>Huawei</organization>
@@ -56,7 +66,7 @@
         <email>d.king@lancaster.ac.uk</email>
       </address>
     </author>
-    <date year="2026" month="April"/>
+    <date year="2026" month="September"/>
 
     <area>OPS</area>
     <workgroup>opsawg</workgroup>
@@ -78,7 +88,7 @@
 
     <abstract>
 
-<!--[rfced] Is "provides" the intended word here, or does the YANG data model "enable" or "support" the policies enforced by the network devices / PEPs?
+<!--[rfced] Abstract. Is "provides" the intended word here? We assume that network devices/PEPs, rather than the YANG data model, enforce the policies. May we update "provides" to "enables"?
 
 Original:
    This document defines a YANG data model for policy-based network access
@@ -94,9 +104,11 @@ Perhaps:
 <t>This document defines a YANG data model for policy-based network access
    control, which provides enforcement of
    network access control policies based on group identity. This YANG data model extends Access Control Lists (ACLs) with date and time parameters to support schedule-aware policy enforcement.</t>
-   <t>Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism, used to enforce policy-based network access control, that eases the maintenance
+   <t>Specifically in scenarios where network access is triggered by user authentication, this document defines a mechanism that eases the maintenance
    of the mapping between a user group identifier and a set of packet header 
-   fields. Moreover, this document defines a Remote Authentication Dial-in
+   fields to enforce policy-based network access control. 
+   
+   Moreover, this document defines a Remote Authentication Dial-in
    User Service (RADIUS) attribute that is used to
    communicate the user group identifier as part of identification and
    authorization information.</t>
@@ -121,7 +133,7 @@ Perhaps:
 LAN (WLAN) and VPN clients, as well as back-end servers based on Virtual Machines
 (VMs), can move; their IP addresses could change as a
 result. Furthermore, mechanisms such as IPv6 temporary addresses <xref target="RFC8981"/> and Network Address Port Translation (NAPT) <xref target="RFC3022"/> may further contribute to address instability and non-uniqueness. This complicates the consistent and efficient access control policy enforcement relying on IP/transport fields (e.g., the
-5-tuple). IP address-based policies may not be flexible
+5-tuple). IP-address-based policies may not be flexible
 enough to accommodate endpoints with volatile IP addresses.</t>
         </li>
         <li>
@@ -130,21 +142,23 @@ apply different security policies to the same set of endpoints under
 different circumstances (e.g., prevent relay attacks against a
 local attachment point to the enterprise network).
 
-<!--[rfced] The first sentence mixes plural possessives ("users' access location," "users' role") with a singular possessive ("device's security posture"). Is this combination of singular and plural intentional, or should these be made singular (e.g., "user's access location" and "user's role") for consistency?
+<!--[rfced] We note a mix of plural possessives ("users' access location," "users' role") with a singular possessive ("device's security posture"). Is this combination of singular and plural intentional, or should these be made singular (e.g., "user's access location" and "user's role") for consistency?
 
-In the second sentence, may we make "endpoints' identity", "context", and "grant" plural? If so "endpoints' identities" will be consistent with use in Section 3.
+May we also add articles, remove the hyphens from "time-of-day", and make
+"endpoints' identity", "context", and "grant" plural? (The plural
+"endpoints' identities" would be consistent with its use in Section 3.)
 
 Original:
-For example, network access might be granted based upon criteria such as users' access location, source network reputation, users' role, type of network device used (e.g., corporate-issued device versus personal device), device's security posture, etc.
+For example, network access might be granted based upon criteria such as users' access location, source network reputation, users' role, time-of-day, type of network device used (e.g., corporate-issued device versus personal device), device's security posture, etc.
 This means that the network needs to recognize the endpoints' identity and their
 current context and map the endpoints to their correct access
 grant to the network.
 
 Perhaps:
-For example, network access might be granted based upon criteria such as a user's access location, source network reputation, a user's role, the type of network device used 
+For example, network access might be granted based upon criteria such as a user's access location, source network reputation, a user's role, the time of day, the type of network device used 
 (e.g., corporate-issued device versus personal device), a device's security posture, etc. 
 This means that the network needs to recognize the endpoints' identities and their
-current contexts, and map the endpoints to their correct access
+current contexts and map the endpoints to their correct access
 grants to the network.
 -->
 
@@ -168,7 +182,7 @@ grant to the network.</t>
    ACL defined in <xref target="sec-UCL"/> does not limit how it can be used.</t>
       <t>Specifically in scenarios where network access is triggered by user authentication, this document also defines a mechanism to establish a mapping between (1) the
    user group identifier (ID) and (2) common IP packet header fields and other
-   encapsulating packet data (e.g., Media Access Control (MAC) address) to execute the policy-based access control.
+   encapsulating packet data (e.g., a Media Access Control (MAC) address) to execute the policy-based access control.
    Additionally, the document defines a Remote Authentication Dial-in
    User Service (RADIUS) <xref target="RFC2865"/> attribute that is used to
    communicate the user group identifier as part of identification and
@@ -189,7 +203,7 @@ dedicated packet fields. Group-Based Policy (GBP), discussed in <xref section="6
     The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL
     NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>",
     "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as
-    described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
+    described in BCP&nbsp;14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
     when, and only when, they appear in all capitals, as shown here.
         </t>
       <t>The meanings of the symbols in tree diagrams are defined in
@@ -208,14 +222,14 @@ dedicated packet fields. Group-Based Policy (GBP), discussed in <xref section="6
         <dt>Enterprise device:</dt>
         <dd>
           <t>A device that falls under the access control domain of
-   centrally managed authority (enterprise administrator, typically).
+   a centrally managed authority (enterprise administrator, typically).
    An enterprise device provides compute, memory, storage, and networking capabilities and connects to a network.</t>
         </dd>
         <dt/>
         <dd>
           <t>An enterprise device could be a server that hosts applications or software that delivers services to enterprise users.
 
- <!--[rfced] Does the inclusion of "etc." mean that more than one example was intended? If so, please provide another example. If not, may we remove "etc."?
+ <!--[rfced] Is "etc." intended to indicate additional types of enterprise devices? If so, please provide another example. If not, may we remove "etc."?
 
 Original:
 It could also be an enterprise Internet of Things (IoT) device that serves a limited purpose (e.g., a printer that allows users to scan and print), etc.
@@ -253,7 +267,7 @@ It could also be an enterprise Internet of Things (IoT) device that serves a lim
    an endpoint group. An endpoint group may include a user group, device group, or application group.</t>
         </dd>
 
-<!--[rfced] We updated the expansion of "UCL" as "User-group-based Control List (UCL)" (with hyphens) for consistency. Note that there are two instances. Please let us know of any objections. 
+<!--[rfced] We updated the expansion of "UCL" to "User-group-based Control List (UCL)" (with hyphens) for consistency. Note that there are two instances (in Section 2 and in the YANG module in Section 5.2). Please let us know of any objections. 
 
 One example:
 
@@ -290,9 +304,9 @@ both at the network device level and at the network/administrative domain level.
    enterprise devices, and applications, and to associate ACLs with endpoint
    groups so that endpoints in each group can share a group of ACL rules.
    This approach greatly reduces
-   the overhead of the administrators and optimizes the ACL resources.</t>
+   the overhead of the administrators and optimizes ACL resources.</t>
       <t>The network ACLs can be provisioned on devices using specific
-   mechanisms, such as described in <xref target="RFC8519"/> or <xref target="RFC9899"/>.</t>
+   mechanisms, such as those described in <xref target="RFC8519"/> or <xref target="RFC9899"/>.</t>
       <t>Different policies may need to be applied in different contextual situations.
    For example, companies may restrict (or grant) employees access to specific
    internal or external resources during work hours,
@@ -320,7 +334,7 @@ both at the network device level and at the network/administrative domain level.
 An SDN controller may interact with an Authentication, Authorization, and Accounting (AAA) <xref target="RFC3539"/> server or a Network Access Server (NAS) <xref target="RFC7542"/>.</t>
           </li>
           <li>
-            <t>A NAS entity that handles authentication requests. The NAS interacts with an AAA server to complete user authentication using protocols like RADIUS <xref target="RFC2865"/>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.  </t>
+            <t>A NAS entity that handles authentication requests. The NAS interacts with a AAA server to complete user authentication using protocols like RADIUS <xref target="RFC2865"/>. When access is granted, the AAA server provides the group identifier (group ID) to which the user belongs when the user first logs onto the network.  </t>
             <t>
 A new RADIUS attribute is defined in <xref target="sec-radius"/> for this purpose.</t>
           </li>
@@ -328,7 +342,7 @@ A new RADIUS attribute is defined in <xref target="sec-radius"/> for this purpos
             <t>The AAA server provides a collection of authentication, authorization, and accounting functions. The AAA server is responsible for centralized user information management. The AAA server is preconfigured with user credentials (e.g., username and password), possible group identities, and related user attributes (users may be divided into different groups based on different user attributes).</t>
           </li>
           <li>
-            <t>PEP is the central entity that is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers ALC policies based on packet header fields to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint-group IDs and act upon the endpoint-group ID-based ACL policies (e.g., a group identifier may be carried in packet headers such as discussed in <xref section="6.2.3" sectionFormat="of" target="RFC9638"/>).  </t>
+            <t>A PEP is the central entity that is responsible for enforcing appropriate access control policies. A first deployment scenario assumes that the SDN controller maps the group ID to the related common packet header and delivers ACL policies based on packet header fields to the required PEPs. Another deployment scenario may require that PEPs map incoming packets to their associated source and/or destination endpoint group IDs and act upon the corresponding group-based ACL policies (e.g., a group identifier may be carried in packet headers, as discussed in <xref section="6.2.3" sectionFormat="of" target="RFC9638"/>).  </t>
             <t>
 Multiple PEPs may be involved in a network.  </t>
             <t>
@@ -456,7 +470,7 @@ in <xref target="sec-UCL"/>. An example is provided in <xref target="controller-
           <dt>Step 2:</dt>
           <dd>
             <t>When a user first logs onto the network, they are
-   required to be authenticated (e.g., using username and password)
+   required to be authenticated (e.g., using a username and password)
    at the NAS.</t>
           </dd>
           <dt>Step 3:</dt>
@@ -475,26 +489,27 @@ in <xref target="sec-UCL"/>. An example is provided in <xref target="controller-
     user group with the identifier returned to the NAS
     as the authentication result (see <xref target="sec-radius"/>).
     If the authentication fails, the user is not assigned any user
-    group, which also means that the user has no access (i.e., Access-Reject returned) or the user
+    group, which also means that the user has no access (i.e., an Access-Reject is returned) or the user
     is assigned a special group with very limited access permissions
     for the network (as a function of the local policy). ACLs are
-    enforced so that flows from that IP address are discarded
+    enforced so that flows from the user's IP address are discarded
     (or rate-limited) by the network.</t>
           </dd>
           <dt/>
           <dd>
-            <t>In some implementations, the AAA server can be integrated with an SDN controller.</t>
+            <t>In some implementations, the AAA server can be integrated with the SDN controller.</t>
           </dd>
           <dt>Step 4:</dt>
           <dd>
-            <t>Either the AAA server or the NAS notifies an SDN controller
+            <t>Either the AAA server or the NAS notifies the SDN controller
    of the mapping between the user group ID and related common packet
-   header attributes (e.g., the 5-tuple). The exact details of how such notification is performed are out scope of this specification.</t>
+   header attributes (e.g., the 5-tuple). The exact details of how such notification is performed are out of scope of this specification.</t>
           </dd>
           <dt>Step 5:</dt>
           <dd>
-            <t>Either group-based or packet header field-based access control policies
-   are maintained on relevant PEPs under the SDN controller's management.
+            <t>Either group-based access control policies or access control policies
+   based on packet header fields are maintained on relevant PEPs under
+   the SDN controller's management.
    Both types of ACL policy may exist on
    the PEP. Appendices <xref target="PEP-ucl" format="counter"/> and <xref target="PEP-acl" format="counter"/> elaborate on each case.</t>
           </dd>
@@ -508,7 +523,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
         <name>Endpoint Group</name>
         <section anchor="sec-ug">
           <name>User Group</name>
-          <t>The user group is determined by a set of predefined policy criteria
+          <t>A user group is determined by a set of predefined policy criteria
    (e.g., source IP address, geolocation data, time of day, or device certificate).
    It uses an identifier (user group ID) to represent the collective identity of
    a group of users. Users may be moved to different user groups if there is a change in their
@@ -526,7 +541,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
    an example of how user group definitions may be characterized. User
    groups may share several common criteria.  That is, user group
    criteria are not mutually exclusive.  For example, the policy
-   criteria of user groups R&amp;D Regular and R&amp;D BYOD may share the same
+   criteria of the user groups R&amp;D Regular and R&amp;D BYOD may share the same
    set of users that belong to the R&amp;D organization but differ only in
    the type of clients (firm-issued clients vs. users' personal
    clients).  Likewise, the same user may be assigned to different user
@@ -567,12 +582,12 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
         </section>
         <section anchor="sec-dg">
           <name>Device Group</name>
-          <t>The device group ID is an identifier that represents the collective
+          <t>A device group ID is an identifier that represents the collective
    identity of a group of enterprise devices.
    <xref target="dg-example"/> shows an example
    of how device group definitions may be characterized.</t>
           <table anchor="dg-example">
-            <name>Device Group Example</name>
+            <name>Device Group Examples</name>
             <thead>
               <tr>
                 <th align="left">Group Name</th>
@@ -584,7 +599,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
               <tr>
                 <td align="left">Workflow</td>
                 <td align="left">bar-40</td>
-                <td align="left">Workflow  resource servers</td>
+                <td align="left">Workflow resource servers</td>
               </tr>
               <tr>
                 <td align="left">R&amp;D Resource</td>
@@ -599,7 +614,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
             </tbody>
           </table>
           <t>Matching abstract device group IDs instead of specified addresses in
-   ACL polices helps shield the consequences of address change (e.g.,
+   ACL policies helps shield the consequences of address changes (e.g.,
    back-end VM-based server migration).</t>
         </section>
         <section anchor="sec-ag">
@@ -607,7 +622,7 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
           <t>An application group is a collection of applications that share common access control policies.
    A device may run multiple applications, and different policies might need to be
    applied to the applications and device. A single application may need to run on
-   multiple devices/VMs/containers; the abstraction of application group eases the
+   multiple devices/VMs/containers; the abstraction of an application group eases the
    process of application migration. For example, the policy does not depend on the transport coordinates (i.e., 5-tuple).
    <xref target="ag-example"/> shows an example of how application group definitions may be characterized.</t>
           <table anchor="ag-example">
@@ -661,8 +676,24 @@ header attributes (e.g., 5-tuple) may be maintained on the SDN controller based 
    enables access control policy activation based on date and time conditions.</t>
         <t><xref target="ucl-tree"/> provides the tree structure of the "ietf-ucl-acl" module.</t>
         <figure anchor="ucl-tree">
+
+<!--[rfced] Figure 2 (Section 5.1)
+
+a) Figure 2 does not match the "ietf-schedule" module in RFC 9922 
+(e.g., "period-start" and "frequency" are optional,
+and "time-zone-identifier" is a sibling of "recurrence-first"). Are 
+any updates needed for consistency?
+
+b) Should the title of Figure 2 be more descriptive?
+
+Current:
+   UCL Extension
+
+Perhaps:
+   Tree Structure of the "ietf-ucl-acl" Module
+-->
           <name>UCL Extension</name>
-          <sourcecode type="yangtree" align="left"><![CDATA[
+          <sourcecode type="yangtree"><![CDATA[
 module: ietf-ucl-acl
 
   augment /acl:acls:
@@ -726,7 +757,7 @@ module: ietf-ucl-acl
         </figure>
         <t>The first part of the "ietf-ucl-acl" module augments the "acl" list in the
    "ietf-access-control-list" module <xref target="RFC8519"/> with an "endpoint-groups" container
-   that includes an "endpoint group" list, where each entry has a "group-id" that uniquely
+   that includes an "endpoint-group" list, where each entry has a "group-id" that uniquely
    identifies the endpoint group and a "group-type" parameter to specify the endpoint group type.</t>
 
      <t indent="3">"group-id" is defined as a string rather than an unsigned integer (e.g., uint32) to accommodate deployments that require some identification hierarchy within a domain. Such a hierarchy is meant to ease coordination within an administrative domain. There might be cases where a domain needs to tag packets with the group they belong to. The tagging does not need to mirror exactly the "group ID" used to populate the policy. How the "group-id" string is mapped to the tagging or field in the packet header in an encapsulation scenario is outside the scope of this document. Augmentation may be considered in the future to cover encapsulation considerations.</t>
@@ -735,9 +766,9 @@ module: ietf-ucl-acl
    "ietf-access-control-list" module <xref target="RFC8519"/> so that a source and/or destination endpoint group index
    can be referenced as the match criteria.</t>
         <t>The third part of the module augments the "ace" list in the "ietf-access-control-list"
-   module <xref target="RFC8519"/> with date- and time-specific parameters to allow ACE to be
+   module <xref target="RFC8519"/> with date- and time-specific parameters to allow an ACE to be
    activated based on a date/time condition. Two types of time ranges are defined,
-   which reuse "recurrence" and "period" groupings defined in the "ietf-schedule"
+   which reuse the "recurrence" and "period" groupings defined in the "ietf-schedule"
    YANG module in <xref target="RFC9922"/>, respectively.</t>
       </section>
       <section anchor="sec-UCL">
@@ -765,7 +796,7 @@ module ietf-ucl-acl {
   organization
     "IETF OPSAWG Working Group";
   contact
-    "WG Web:  https://datatracker.ietf.org/wg/opsawg/
+    "WG Web:  <https://datatracker.ietf.org/wg/opsawg/>
      WG List: OPSAWG <mailto:opsawg@ietf.org>
 
      Editor:   Qiufang Ma
@@ -1096,15 +1127,15 @@ module ietf-ucl-acl {
     </section>
     <section anchor="sec-radius">      
       <name>User-Access-Group-ID RADIUS Attribute</name>
-      <t>This section defines a User-Access-Group-ID RADIUS attribute, which is designed for user-centric access control scenarios where network access is triggered by user authentication and used to indicate the user group ID to be used by the NAS.
-For other endpoint group types, such as device group or application group, the identifiers are typically pre-provisioned
+      <t>This section defines the User-Access-Group-ID RADIUS attribute, which is designed for user-centric access control scenarios where network access is triggered by user authentication and used to indicate the user group ID to be used by the NAS.
+For other endpoint group types, such as device or application groups, the identifiers are typically preprovisioned
 on the SDN controller based on an inventory or an application registry.</t>
       <t>The User-Access-Group-ID RADIUS attribute is
 defined with a globally unique name. The definition of the attribute
 follows the guidelines in <xref section="2.7.1" sectionFormat="of" target="RFC6929"/>. When
 the User-Access-Group-ID RADIUS attribute is present in the RADIUS
 Access-Accept, the system applies the related access control to the
-users after the user authenticates.</t>
+user after the user authenticates.</t>
       <t>The User-Access-Group-ID Attribute is of type "string" as defined in
 <xref section="3.5" sectionFormat="of" target="RFC8044"/>.</t>
       <t>The User-Access-Group-ID Attribute <bcp14>MAY</bcp14> appear in a RADIUS
@@ -1115,12 +1146,47 @@ one instance of the User-Access-Group-ID Attribute appears in a RADIUS
 Access-Accept packet, it means that the user is a member of many groups.</t>
       <t>The User-Access-Group-ID Attribute <bcp14>MAY</bcp14> appear in a RADIUS CoA-Request
 packet.</t>
+
+<!--[rfced] Section 6: Should "Access-Request" be "Access-Accept" here?
+We assume the NAS receives the attribute in the Access-Accept.
+
+Original:
+   Specifically, this may be used by a NAS to acknowledge that the
+   attribute was received in the RADIUS Access-Request and the NAS is
+   enforcing that policy.
+
+Perhaps:
+   Specifically, this may be used by a NAS to acknowledge that the
+   attribute was received in the RADIUS Access-Accept and the NAS is
+   enforcing that policy.
+-->
+
       <t>The User-Access-Group-ID Attribute <bcp14>MAY</bcp14> appear in a RADIUS Accounting-Request
 packet. Specifically, this may be used by a NAS to acknowledge that the attribute
 was received in the RADIUS Access-Request and the NAS is enforcing that policy.</t>
       <t>The User-Access-Group-ID Attribute <bcp14>MUST NOT</bcp14> appear in any other
 RADIUS packet.</t>
       <t>The User-Access-Group-ID Attribute is structured as follows:</t>
+
+<!-- [rfced] Section 6: The description of the Length field lists
+"Extended-Type" in the first sentence but "Extended-Length" in the
+second. Per Section 2.1 of RFC 6929, the Extended Type format contains
+Type, Length, and Extended-Type fields, and it has no "Extended-Length" 
+field. May we update the second sentence as follows for consistency?
+
+Original:
+   The Length MUST be 67 octets at most. The maximum length is 67
+   octets to accommodate the maximum group ID of 64 octets plus one
+   octet for Type, one octet for Length, and one octet for
+   Extended-Length.
+
+Perhaps:
+   The Length MUST be 67 octets at most. The maximum length is 67
+   octets to accommodate the maximum group ID of 64 octets plus one
+   octet for Type, one octet for Length, and one octet for
+   Extended-Type.
+-->
+
       <dl newline="false">
         <dt>Type:</dt>
         <dd>
@@ -1130,7 +1196,7 @@ RADIUS packet.</t>
         <dd>
           <t>This field indicates the total length, in octets, of all fields of
    this attribute -- including the Type, Length, and Extended-Type -- and the
-   "Value".</t>
+   Value.</t>
           <t>The Length <bcp14>MUST</bcp14> be 67 octets at most. The maximum length is 67 octets to accommodate the maximum group ID of 64 octets plus one octet for Type, one octet for Length, and one octet for Extended-Length.</t>
         </dd>
         <dt>Data Type:</dt>
@@ -1145,7 +1211,7 @@ RADIUS packet.</t>
     </section>
     <section anchor="radius-attributes">
       <name>RADIUS Attributes</name>
-      <t><xref target="rad-att"/> provides a guide that indicates what type of RADIUS packets
+      <t><xref target="rad-att"/> provides a guide that indicates which types of RADIUS packets
    may contain a User-Access-Group-ID Attribute and in what
    quantity.</t>
       <table anchor="rad-att">
@@ -1199,11 +1265,11 @@ RADIUS packet.</t>
       <name>Operational Considerations</name>
       <section anchor="deployment-options">
         <name>Deployment Options</name>
-        <t>The UCL model can be implemented in different ways.</t>
+        <t>The UCL data model can be implemented in different ways.</t>
         <t>In some cases, the UCL data model is implemented at the network/administrative domain
    level, where an SDN controller maintains the dynamic mapping from an endpoint
    group ID to IP/transport fields (e.g., the 5-tuple) and programs the PEPs with
-   IP-address or 5-tuple-based ACLs. In such cases, PEPs do not require implementing
+   IP-address-based or 5-tuple-based ACLs. In such cases, PEPs do not require implementing
    specific logic (including hardware) compared to the enforcement of conventional ACLs.</t>
         <t>It is possible for the UCL data model to be implemented at the device level.
    While it eliminates the need for an SDN controller to interact frequently
@@ -1214,43 +1280,55 @@ RADIUS packet.</t>
    ID from the AAA server, ACL policy enforcement based on the group identity without
    being encapsulated into packet headers might affect the forwarding performance.
    Implementations need to evaluate the operational trade-off (flexibility brought
-   to the network vs. the complexity of implementation) carefully. Such assessment
+   to the network vs. the complexity of implementation) carefully. Such an assessment
    is out of scope for this document.</t>
       </section>
       <section anchor="hardwaresoftware-implications">
         <name>Hardware/Software Implications</name>
         <t>Some devices may not have built-in capabilities to enforce group-based match policies.
-   Hardware or software upgrades may be required to support such features by involved PEPs.</t>
+   Hardware or software upgrades may be required to support such features by the involved PEPs.</t>
       </section>
       <section anchor="mapping-consistency">
         <name>Mapping Consistency</name>
-        <t>This specification requires that adequate setup is put in place to map a Group ID to packet
+        <t>This specification requires that an adequate setup is put in place to map a group ID to packet
    fields, typically managed by a controller. Special care should be taken
    to ensure that such mapping is appropriately enforced when distinct
-   mechanisms (RADIUS, etc.) are supported in network.</t>
+   mechanisms (RADIUS, etc.) are supported in the network.</t>
       </section>
     </section>
     <section anchor="security-considerations">
 
-<!--[rfced] *AD, please review the following updates made to the Security Considerations 
+<!--[rfced] *AD, please review the following updates made to the Security Considerations section
 (Section 9.1) and let us know if you approve.
 
 a) To be compliant with the template in Section 3.7.1 of RFC 9907, we added the following 
-statement.  Please let us know of any ojections.
+statement.  Please let us know of any objections.
 
 Current (added):
    There are no particularly sensitive RPC or action operations.
 
-...
-b) Section 9.1 reuses the "period" and "recurrence" groupings from the "ietf-schedule" module 
-in RFC 9922, and these show up as actual data nodes in this module's tree (e.g., period-start, period-end, start-time, until, and exception-dates). Given this, we added the following paragraph (from the RFC 9907 template) with a pointer to RFC 9922. Please let us know of any objections.
+b) The "ietf-ucl-acl" module reuses the "period" and "recurrence" groupings from the "ietf-schedule" module in RFC 9922, and these show up as actual data nodes in this 
+module's tree (e.g., period-start, period-end, start-time, until, and exception-dates).
+Given this, we added the following paragraph (from the RFC 9907 template) with a pointer 
+to RFC 9922. Please let us know of any objections.
 
 Current (added):
 This YANG module uses groupings from other YANG modules that define nodes that may be 
 considered sensitive or vulnerable in network environments. Refer to the Security 
 Considerations of [RFC9922] for information as to which nodes may be considered
 sensitive or vulnerable in network environments.    
---> 
+
+c) Should "must" be "MUST" here? If a requirement is not intended, may we rephrase as 
+shown below?
+
+Original:
+   Strict access control must be implemented for write operations on
+   this subtree to ensure that only authorized users can modify it.
+
+Perhaps:
+   Strict access control is needed for write operations on this
+   subtree to ensure that only authorized users can modify it.
+-->
 
       <name>Security Considerations</name>
       <section anchor="yang">
@@ -1284,7 +1362,7 @@ which could be used to craft an attack.</t>
           </li>
           <li>
             <t>/acl:acls/acl:acl/acl:aces/acl:ace/acl:matches/ucl:endpoint-group:</t>
-            <t>This subtree specifies a source and/or endpoint group index as match criteria in the
+            <t>This subtree specifies a source and/or destination endpoint group index as match criteria in the
 ACEs. Unauthorized write access to this data node may allow intruders to
 modify the group identity so as to permit access that should not be
 permitted, or deny access that should be permitted.</t>
@@ -1304,8 +1382,8 @@ alter it. This may lead to service disruption or unavailability. Strict access c
         <ul spacing="normal">
           <li>
             <t>/acl:acls/acl:acl/acl:aces/acl:ace/ucl:effective-schedule:</t>
-            <t>It specifies when the access control entry rules are applied. An
-unauthorized read access of the list will allow the attacker to determine
+            <t>It specifies when the access control entry rules are applied. 
+Unauthorized read access of the list will allow an attacker to determine
 which rules are applied, to better craft an attack.</t>
           </li>
         </ul>
@@ -1323,7 +1401,7 @@ sensitive or vulnerable in network environments.
       <section anchor="radius">
         <name>RADIUS</name>
         <t>RADIUS-related security considerations are discussed in <xref target="RFC2865"/>.
-   An effort to deprecating insecure practices in RADIUS is provided in <xref target="I-D.ietf-radext-deprecating-radius"/>.</t>
+   An effort to deprecate insecure practices in RADIUS is provided in <xref target="I-D.ietf-radext-deprecating-radius"/>.</t>
         <t>This document targets deployments where a trusted relationship is in
    place between the RADIUS client and server with communication
    optionally secured by IPsec or Transport Layer Security (TLS)
@@ -1349,7 +1427,7 @@ sensitive or vulnerable in network environments.
           <dt>Name:</dt><dd>ietf-ucl-acl</dd>
           <dt>Maintained by IANA?</dt><dd>N</dd>
           <dt>Namespace:</dt><dd>urn:ietf:params:xml:ns:yang:ietf-ucl-acl</dd>
-           <dt>Prefix:</dt><dd>ucl</dd>
+          <dt>Prefix:</dt><dd>ucl</dd>
           <dt>Reference:</dt><dd>RFC XXXX</dd>
 	</dl>
       </section>
@@ -1480,6 +1558,18 @@ sensitive or vulnerable in network environments.
         <t>Let's consider an organization that would like to manage the access of R&amp;D
    employees who bring personally owned devices (BYOD) into the workplace.</t>
         <t>The access requirements are as follows:</t>
+
+<!--[rfced] "BYOD" is expanded as "Bring Your Own Device (BYOD)
+policies" but is also used to refer to devices (e.g., "R&D employee
+BYODs"). May we update as follows for clarity?
+
+Original:
+   Permit traffic from R&D employee BYODs, destined to ...
+
+Perhaps:
+   Permit traffic from R&D employees' personal devices, destined to ...
+-->
+
         <ul spacing="normal">
           <li>
             <t>Permit traffic from R&amp;D employee BYODs, destined to R&amp;D employees'
@@ -1487,15 +1577,25 @@ devices, every work day from 8:00:00 to 18:00:00 UTC, starting on January 1, 202
           </li>
           <li>
             <t>Deny traffic from R&amp;D employee BYODs, destined to finance servers
-located in the enterprise DC network, starting at 8:30:00 on January 20,
+located in the enterprise data center (DC) network, starting at 8:30:00 on January 20,
 2026, with an offset of -08:00 from UTC (Pacific Standard Time), and ending
 at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
           </li>
         </ul>
-        <t>The example shown in <xref target="ex-controller-ucl"/> illustrates the configuration of an SDN controller
-   using the group-based ACL:</t>
+        <t>The example shown in <xref target="ex-controller-ucl"/> illustrates the configuration of an SDN controller using the group-based ACL:</t>
+
+<!--[rfced] We updated the title of Figure 3 to be more descriptive. 
+Please let us know of any objections.
+
+Original:
+   Example of UCL Configuration
+
+Current:
+   Example of UCL Configuration on the SDN Controller
+-->
+
         <figure anchor="ex-controller-ucl">
-          <name>Example of UCL Configuration</name>
+          <name>Example of UCL Configuration on the SDN Controller</name>
           <sourcecode type="json"><![CDATA[
 {
   "ietf-access-control-list:acls": {
@@ -1593,7 +1693,7 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
    from the AAA server if working as a NAS authenticating both the
    source endpoint and destination endpoint users. Another case for
    a PEP enforcing a group-based ACL is to obtain the group identity of
-   the source endpoint directly from the packet field
+   the source endpoint directly from a packet field
    <xref target="I-D.smith-vxlan-group-policy"/>.</t>
         <t>Assume the mapping between a device group ID and IP addresses is
    predefined or acquired via device authentication. <xref target="ex-PEP-ucl"/>
@@ -1602,6 +1702,24 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
         <t>The examples in this section do not intend to be exhaustive. In particular, explicit
    IP addresses ("destination-ipv4-network" or "destination-ipv6-network") are provided only for one single rule to illustrate
    how the mapping between a group ID and IP addresses is translated into an ACL rule entry.</t>
+
+<!--[rfced] Appendices A.2 and A.3: The titles of Figures 4 and 6 are
+identical, as are the titles of Figures 5 and 7 (apart from the
+capitalization of "IPv6"). To help readers tell the examples apart,
+may we update the titles to say which type of ACL each example uses?
+
+Original:
+   Figure 4: Example of PEP Configuration
+   Figure 5: Example of PEP Configuration (ipv6)
+   Figure 6: Example of PEP Configuration
+   Figure 7: Example of PEP Configuration (IPv6)
+
+Perhaps:
+   Figure 4: Example of PEP Configuration Using a Group-Based ACL
+   Figure 5: Example of PEP Configuration Using a Group-Based ACL (IPv6)
+   Figure 6: Example of PEP Configuration Using an Address-Based ACL
+   Figure 7: Example of PEP Configuration Using an Address-Based ACL (IPv6)
+-->
         <figure anchor="ex-PEP-ucl">
           <name>Example of PEP Configuration</name>
           <sourcecode type="json"><![CDATA[
@@ -1690,6 +1808,36 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
   }
 }]]></sourcecode>
         </figure>
+
+<!--[rfced] Figure 7 (Appendix A.3)
+
+a) The source and destination are both IPv6 in Figure 7. May we
+update the text as follows?
+
+Original:
+   Figure 7 shows an example of the same policy but with a
+   destination IPv6 prefix.
+
+Perhaps:
+   Figure 7 shows an example of the same policy but with IPv6
+   prefixes.
+
+b) The source (2001:db8::2:1/64) and destination (2001:db8::1/64) 
+of rule1 are in the same /64
+prefix, whereas the source and destination in Figure 6 are in
+different subnets. Should different /64 prefixes be used? If so,
+may we update as follows? (Note that the source prefix is also used
+in rule2.)
+
+Original:
+   "destination-ipv6-network": "2001:db8::1/64",
+   "source-ipv6-network": "2001:db8::2:1/64"
+
+Perhaps:
+   "destination-ipv6-network": "2001:db8:0:2::/64",
+   "source-ipv6-network": "2001:db8:0:1::/64"
+-->
+
         <t><xref target="ex-PEP-ucl-ipv6"/> shows an example of the same policy but with a destination IPv6 prefix.</t>
         <figure anchor="ex-PEP-ucl-ipv6">
           <name>Example of PEP Configuration (ipv6)</name>
@@ -1784,11 +1932,11 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
         <name>Configuring a PEP Using an Address-Based ACL</name>
         <t>This section describes an example of configuring a PEP using
    an IP-address-based ACL. IP-address-based access control policies could
-   be applied to the PEP that may not understand the group information (e.g., a firewall).</t>
+   be applied to a PEP that may not understand the group information (e.g., a firewall).</t>
         <t>Assume an employee in the R&amp;D department accesses the network
    wirelessly from a non-corporate laptop.
    The SDN controller associates the user group to which the employee
-   belongs with the user address according to steps 1 to 4 in <xref target="overview"/>.</t>
+   belongs with the user's address according to steps 1 to 4 in <xref target="overview"/>.</t>
         <t>Assume the mapping between a device group ID and IP addresses is
    predefined or acquired via device authentication. <xref target="ex-PEP-acl"/>
    shows an IPv4-address-based ACL configuration delivered from
@@ -1949,11 +2097,11 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
       <name>Acknowledgments</name>
       <t>This work has benefited from the discussions of user-group-based
    security policies over the years.  In particular, <xref target="I-D.you-i2nsf-user-group-based-policy"/>
-   and <xref target="I-D.yizhou-anima-ip-to-access-control-groups"/> provid mechanisms to
+   and <xref target="I-D.yizhou-anima-ip-to-access-control-groups"/> provide mechanisms to
    establish a mapping between the IP address/prefix of users and access
    control group IDs. The authors would like to thank <contact fullname="Jianjie You"/>, <contact fullname="Myo Zarny"/>, <contact fullname="Christian Jacquenet"/>, and <contact fullname="Yizhou Li"/> for their early contributions to these works.</t>
       <t>Thanks to <contact fullname="Joe Clarke"/>, <contact fullname="Bill Fenner"/>, <contact fullname="Benoît Claise"/>, <contact fullname="Rob Wilton"/>, <contact fullname="David Somers-Harris"/>,
-   <contact fullname="Alan Dekok"/>, <contact fullname="Heikki Vatiainen"/>, <contact fullname="Wen Xiang"/>, <contact fullname="Wei Wang"/>, <contact fullname="Hongwei Li"/>, and <contact fullname="Jensen Zhang"/> for
+   <contact fullname="Alan DeKok"/>, <contact fullname="Heikki Vatiainen"/>, <contact fullname="Wen Xiang"/>, <contact fullname="Wei Wang"/>, <contact fullname="Hongwei Li"/>, and <contact fullname="Jensen Zhang"/> for
    their review and comments.</t>
       <t>Thanks to <contact fullname="Dhruv Dhody"/> for the OPSDIR review, <contact fullname="Alexander Pelov"/> for the INTDIR review, <contact fullname="Valery Smyslov"/> for the SECDIR review, and <contact fullname="Acee Lindem"/> for the YANGDOCTORS review.</t>
       <t>Thanks to <contact fullname="Mahesh Jethanandani"/> for the AD review.</t>
@@ -1961,5 +2109,54 @@ at 18:00:00 in Pacific Standard Time on December 31, 2026.</t>
     </section>
   </back>
 
+<!--[rfced] Please review each artwork element and sourcecode element in
+the XML file to ensure that the "type" attribute is set correctly and
+that it contains an appropriate value from
+https://www.rfc-editor.org/materials/sourcecode-types.txt. If the
+current list does not contain an applicable type, feel free to suggest
+additions for consideration. Note that it is also acceptable to leave
+the "type" attribute not set.
+
+Current types: "yangtree" (Figure 2), "yang" (Section 5.2), and
+"json" (Figures 3-7).
+-->
+
+<!-- [rfced] Throughout the text, the following terminology appears to be used 
+inconsistently. Please review these occurrences and let us know if/how they
+may be made consistent.  
+  
+  corporate-issued vs. firm-issued  
+     [Note: Are these the same or different?]
+
+  endpoint group identity vs.
+  endpoint group identifier vs.
+  endpoint group index vs.
+  endpoint group ID
+     [Note: "identity" is the concept, and "identifier"/"ID" is the value. 
+     "identity" appears to be used where "identifier" is meant in some places 
+     (e.g., "an endpoint group identity may be carried in the outer/inner 
+      packet header").
+
+  User-Access-Group-ID RADIUS attribute vs.
+  User-Access-Group-ID Attribute
+-->
+
+<!-- [rfced] FYI - We have added expansions for the following
+abbreviations per Section 3.6 of RFC 7322 ("RFC Style Guide").
+Please review this and each expansion in the document carefully 
+to ensure correctness.
+
+  data center (DC)
+  Media Access Control (MAC)
+-->
+
+<!-- [rfced] Please review the "Inclusive Language" portion of the online 
+Style Guide <https://www.rfc-editor.org/authors/rfc-style-guide/#inclusive-language>
+and let us know if any changes are needed.  Updates of this nature typically
+result in more precise language, which is helpful for readers.
+
+Note that our script did not flag any words in particular, but this should 
+still be reviewed as a best practice.
+-->
 
 </rfc>
