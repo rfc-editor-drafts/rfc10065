@@ -691,7 +691,7 @@ module: ietf-ucl-acl
         <name>The "ietf-ucl-acl" YANG Module</name>
         <t>This module imports types and groupings defined in the "ietf-schedule" module
    <xref target="RFC9922"/>. It also augments the "ietf-access-control-list" module (<xref section="4.1" sectionFormat="of" target="RFC8519"/>).</t>
-        <sourcecode name="ietf-ucl-acl@2026-09-28.yang" type="yang" markers="true"><![CDATA[
+        <sourcecode name="ietf-ucl-acl@2026-10-07.yang" type="yang" markers="true"><![CDATA[
 module ietf-ucl-acl {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-ucl-acl";
@@ -746,7 +746,7 @@ module ietf-ucl-acl {
      This version of this YANG module is part of RFC 10065; see
      the RFC itself for full legal notices.";
 
-  revision 2026-09-28 {
+  revision 2026-10-07 {
     description
       "Initial revision.";
     reference

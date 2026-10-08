@@ -629,7 +629,7 @@ Table of Contents
    schedule" module [RFC9922].  It also augments the "ietf-access-
    control-list" module (Section 4.1 of [RFC8519]).
 
-   <CODE BEGINS> file "ietf-ucl-acl@2026-09-28.yang"
+   <CODE BEGINS> file "ietf-ucl-acl@2026-10-07.yang"
    module ietf-ucl-acl {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-ucl-acl";
@@ -684,7 +684,7 @@ Table of Contents
         This version of this YANG module is part of RFC 10065; see
         the RFC itself for full legal notices.";
 
-     revision 2026-09-28 {
+     revision 2026-10-07 {
        description
          "Initial revision.";
        reference

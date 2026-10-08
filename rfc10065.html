@@ -22,7 +22,7 @@
    communicate the user group identifier as part of identification and
    authorization information. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="ACL" name="keyword">
 <meta content="BYOD" name="keyword">
 <meta content="Access control" name="keyword">
@@ -39,20 +39,20 @@
 <meta content="SDN" name="keyword">
 <meta content="10065" name="rfc.number">
 <!-- Generator version information:
-  xml2rfc 3.34.0
+  xml2rfc 3.34.1
     Python 3.14.7
-    ConfigArgParse 1.7.5
+    ConfigArgParse 1.7.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.3
     natsort 8.4.0
-    platformdirs 4.11.7
+    platformdirs 4.11.8
     pycountry 26.2.16
     PyYAML 6.0.3
     requests 2.34.2
     wcwidth 0.8.3
-    weasyprint 69.0
+    weasyprint 70.0
 -->
 <link href="rfc10065.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -377,6 +377,10 @@ table p {
   /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
      be allowed within tables more generally, it would be far better to select on a class. */
   margin: 0;
+}
+sub,
+sup {
+ white-space: nowrap;
 }
 
 /* pilcrow */
@@ -1084,6 +1088,9 @@ aside > p {
 @media print {
   figcaption, table caption {
     page-break-before: avoid;
+  }
+  table {
+    page-break-inside: avoid;
   }
 }
 /* Font size adjustments for print */
@@ -2134,7 +2141,7 @@ module: ietf-ucl-acl
 <p id="section-5.2-1">This module imports types and groupings defined in the "ietf-schedule" module
    <span>[<a href="#RFC9922" class="cite xref">RFC9922</a>]</span>. It also augments the "ietf-access-control-list" module (<span><a href="https://www.rfc-editor.org/rfc/rfc8519#section-4.1" class="relref">Section 4.1</a> of [<a href="#RFC8519" class="cite xref">RFC8519</a>]</span>).<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <div class="breakable lang-yang sourcecode" id="section-5.2-2">
-<pre>&lt;CODE BEGINS&gt; file "ietf-ucl-acl@2026-09-28.yang"
+<pre>&lt;CODE BEGINS&gt; file "ietf-ucl-acl@2026-10-07.yang"
 
 module ietf-ucl-acl {
   yang-version 1.1;
@@ -2190,7 +2197,7 @@ module ietf-ucl-acl {
      This version of this YANG module is part of RFC 10065; see
      the RFC itself for full legal notices.";
 
-  revision 2026-09-28 {
+  revision 2026-10-07 {
     description
       "Initial revision.";
     reference
